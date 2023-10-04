@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Smark Air</title>
+		<title>Documentation - Smark Air</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -19,22 +19,17 @@
 
 				<!-- Header -->
 					<header id="header">
-						<a href="index.html" class="logo">Smark Air</a>
+						<a href="index.php" class="logo">Smark Air</a>
 					</header>
 
 				<!-- Nav -->
 					<nav id="nav">
 						<ul class="links">
 							<li><a href="index.php">Air Quality</a></li>
-							<li class="active"><a href="Registration.php">User Registration</a></li>
-							<li><a href="elements.html">Documentation</a></li>
+							<li><a href="registration.html">User Registration</a></li>
+							<li class="active"><a href="elements.html">Documentation</a></li>
 						</ul>
-						<ul class="icons">
-							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-						</ul>
+						
 					</nav>
 
 				<!-- Main -->
@@ -43,35 +38,34 @@
 						<!-- Post -->
 							<section class="post">
 								<header class="major">
-								
-									<h1>User<br />
-									Registration</h1>
-									<div>
-									<form method="post" action="Registration.php">
-										<label for="email"><b>Email Address</b></label>
-										<input type="email" placeholder="Email" name="email" required>
-
-										<label for="psw"><b>Password</b></label>
-          								<input type="password" placeholder="Password" name="psw" required>
-										<input type="password" placeholder="Confirm Password" name="confirmpwd" required>
-
-										<label for="name"><b>Name</b></label>
-										<input type="Name" placeholder="First Name" name="last_name" required>
-										<input type="Name" placeholder="Last Name" name="first_name" required> 
-
-										<label for="serialNumber">Device Serial Number:</label>
-										<input type="text" id="serialNumber" name="dev_id">
-
-										<label for="location">City:</label>
-    									<input type="text" name="location" required><br>
-
-										<br />
-										<button id="SignUpButton" input type="submit" value="Registration">Sign Up</button>
-									</form>
-
-										<p id="Terms">By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
-									</div>
+									<h1>User Reset Portal</h1>
 								</header>
+
+								<!-- Text stuff -->
+									<h2>Temp Page to Assist Users with Account</h2>
+								<!-- Form -->
+
+								<!-- Box -->
+									<h2>Box</h2>
+									<div class="box">
+										<p>Felis sagittis eget tempus primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Magna sed etiam ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus lorem ipsum dolor sit amet nullam. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Vestibulum ante ipsum primis in faucibus magna blandit adipiscing eu felis iaculis volutpat lorem ipsum dolor.</p>
+									</div>
+
+									<hr />
+
+								<!-- Preformatted Code -->
+									<h2>Preformatted</h2>
+									<pre><code>i = 0;
+
+while (!deck.isInOrder()) {
+    print 'Iteration ' + i;
+    deck.shuffle();
+    i++;
+}
+
+print 'It took ' + i + ' iterations to sort the deck.';
+</code></pre>
+
 							</section>
 
 					</div>
@@ -113,15 +107,7 @@
 								<h3>Email</h3>
 								<p><a href="#">info@untitled.tld</a></p>
 							</section>
-							<section>
-								<h3>Social</h3>
-								<ul class="icons alt">
-									<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</section>
+							
 						</section>
 					</footer>
 

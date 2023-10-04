@@ -1,4 +1,3 @@
-
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -6,12 +5,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $first_name = $_POST["first_name"];
     $dev_id = $_POST["dev_id"];
     $location = $_POST["location"];
+    $psw = $_POST["psw"];
+    $confirmpsw = $_POST["confirmpwd"];
+    $email = $_POST["email"];
+
+
+
+if($psw !== $confirmpsw){
+    echo "Passwords do not match!";
+    exit;
+
+}
+
 
     echo "Last Name: " . $last_name . "<br>";
     echo "First Name: " . $first_name . "<br>";
     echo "Device Serial Number: " . $dev_id . "<br>";
     echo "City: " . $location . "<br>";
-
+    
 
 // Connection to the database
 $servername = "localhost";
@@ -37,7 +48,7 @@ else {
             echo "Your device serial number is incorrect!!!";}
             else {
 
-                $insertdata = "INSERT INTO user_info (first_name, last_name, loc, dev_id) VALUES ('$first_name', '$last_name', '$location', '$devid')";
+                $insertdata = "INSERT INTO user_info (first_name, last_name, loc, dev_id, psw, email) VALUES ('$first_name', '$last_name', '$location', '$dev_id', '$psw', '$confirmpsw', '$email')";
                     $result_insertdata = mysqli_query($connection, $insertdata);
                     if(!$result_insertdata)
                     {
@@ -54,4 +65,3 @@ else {
 }       
 
 ?>
-
