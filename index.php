@@ -125,7 +125,27 @@ if ($conn->connect_error) {
 							<li class="active"><a href="index.php">Air Quality</a></li>
 							<li><a href="Registration.html">User Registration</a></li>
 							<li><a href="elements.html">Documentation</a></li>
-							<li><a href="login.html">Login</a></li>
+
+							<?php
+							if (isset($_COOKIE['my_cookie'])) {
+
+								$cookieValue = $_COOKIE['my_cookie'];
+								$cookieValues = explode('|', $cookieValue);
+								$did = $cookieValues[6];
+
+								if ($did == "99999") {
+									echo '<li><a href="admin.php">Portal Page</a></li>'; 
+								} else {
+									echo '<li><a href="user.php">Portal Page</a></li>'; 
+								}
+								echo '<li><a href="#" onclick="logout()">Logout</a></li>';
+							}
+							else{
+								echo '<li><a href="login.html">Login</a></li>';
+							}
+							?>
+
+<!--							<li><a href="login.html">Login</a></li> -->
 						</ul>
 						
 					</nav>
@@ -136,7 +156,7 @@ if ($conn->connect_error) {
 						<!-- Featured Post -->
 							<article class="post featured">
 								<header class="major">
-									<h2><a href="#">Air Quality in Calgary</a></h2>
+									<h2>Air Quality in Calgary</h2>
 									<p>This is the current air quality found in the city of Calgary.This information is broken </br> 
 									down into the city wards </p>
 								</header>
@@ -308,7 +328,6 @@ if ($conn->connect_error) {
 									</ul>
 								</article>
 							</section>
-							
 
 						<!-- Footer 
 							<footer>
@@ -326,7 +345,7 @@ if ($conn->connect_error) {
 				<!-- Footer -->
 					<footer id="footer">
 						<section>
-							<form method="post" action="#">
+							<form method="post" action="send_email.php">
 								<div class="fields">
 									<div class="field">
 										<label for="name">Name</label>
@@ -377,6 +396,14 @@ if ($conn->connect_error) {
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+			function logout() {
+			// Delete the cookie by setting its expiration date to the past
+			document.cookie = "my_cookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
+			// Redirect the user to index.php
+			window.location.href = "index.php";
+			}
+			</script>
 	</body>
 </html>

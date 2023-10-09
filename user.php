@@ -234,12 +234,11 @@ if ($conn->connect_error) {
 			<script>
 			function logout() {
 			// Delete the cookie by setting its expiration date to the past
-			document.cookie = "your_cookie_name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+			document.cookie = "my_cookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
 			// Redirect the user to index.php
 			window.location.href = "index.php";
 			}
 			</script>
-
 	</body>
 </html>
