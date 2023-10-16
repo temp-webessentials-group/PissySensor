@@ -32,7 +32,8 @@ pm = PM.pmsensor()
 while True:
     nh3 = gases.ammonia()
     pm = PM.pmsensor()
-
+    
+    #testing to send data for particulates
     pm_data.append(pm) #append to list
     #print(pm_data)
     
