@@ -37,14 +37,33 @@ if ($conn->connect_error) {
 						<a href="index.php" class="logo">Smark Air</a>
 					</header>
 
-				<!-- Nav -->
+					<!-- Nav -->
 					<nav id="nav">
 						<ul class="links">
 							<li><a href="index.php">Air Quality</a></li>
-							<li><a href="registration.html">User Registration</a></li>
-							<li><a href="elements.html">Documentation</a></li>
-							<li><a href="login.html">Login</a></li>
+							<li><a href="Registration_new.php">User Registration</a></li>
+							<li><a href="elements.php">Documentation</a></li>
+
+							<?php
+							if (isset($_COOKIE['my_cookie'])) {
+
+								$cookieValue = $_COOKIE['my_cookie'];
+								$cookieValues = explode('|', $cookieValue);
+								$did = $cookieValues[6];
+
+								if ($did == "99999") {
+									echo '<li class="active"><a href="admin.php">Portal Page</a></li>'; 
+								} else {
+									echo '<li class="active"><a href="user.php">Portal Page</a></li>'; 
+								}
+								echo '<li><a href="#" onclick="logout()">Logout</a></li>';
+							}
+							else{
+								echo '<li><a href="login_new.php">Login</a></li>';
+							}
+							?>
 						</ul>
+						
 					</nav>
 
 				<!-- Main -->
@@ -56,6 +75,7 @@ if ($conn->connect_error) {
 									<h1>Welcome</h1>
 									<h2>Temp Page for Admins</h2>
 								</header>
+
 									<?php										
 										// Check if the "my_cookie" cookie is set
 										if (isset($_COOKIE['my_cookie'])) {
@@ -78,7 +98,7 @@ if ($conn->connect_error) {
 
 									<h2>Reporting</h2>
 									<p>graphs and readings will go here: Template image from Enviro Page</p>
-									<img src="images/screenshot-darkTheme.jpg" alt="Placeholder"" style="width:800px;height:800px;">
+									<img src="images/screenshot-darkTheme.jpg" alt="Placeholder" style="width:800px;height:800px;">
 										
 									<h2>Inventory</h2>
 									<button id="toggleButton">View Table</button><br>
@@ -99,30 +119,29 @@ if ($conn->connect_error) {
 											}											
 											else {
 												echo "No records found";
-											}
-												
-											
-										 	
+											}		
 										?>
+
 									<h2>Geolocation Data: </h2>
 									<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2507.3766087946556!2d-114.09183072340633!3d51.064597571715964!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x53716f927202bf3f%3A0x16877e49fcc8dbcb!2sStan%20Grad%20Centre!5e0!3m2!1sen!2sca!4v1696447569696!5m2!1sen!2sca" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 									</header>
 
 								</article>
+
 									<section class="posts">
 										<article>
 											<header>
 												<h2><a href="#">User Administration</a></h2>
 											</header>
-											<a href="#" class="image fit"><img src="images/my-profile-icon.jpg" alt="" /></a>
-									<p>Change User Information Here</p>
+											<a href="#"><img src="images/administrator.jpg" alt="" /></a>
 									<?php
 										$sql = "SELECT COUNT(*) as count FROM user_info";
 												$result = $conn->query($sql);
 												if ($result) {
 													$row = $result->fetch_assoc();
 													$rowCount = $row['count'];
+													echo"<p> </p><br> ";
 													echo"Number of Users: " . $rowCount - 1 . "<br>";
 												}												
 												else {
@@ -137,14 +156,14 @@ if ($conn->connect_error) {
 									<header>
 										<h2><a href="#">Device Management</a></h2>
 									</header>
-									<a href="#" class="image fit"><img src="images/my-profile-icon.jpg" alt="" /></a>
-									<p>Reset Air Quality Monitor Here</p>
+									<a href="#" ><img src="images/air-quality.jpg" alt="" /></a>
 									<?php
 										$sql = "SELECT COUNT(*) as count FROM device_info";
 												$result = $conn->query($sql);
 												if ($result) {
 													$row = $result->fetch_assoc();
 													$rowCount = $row['count'];
+													echo"<p> </p><br> ";
 													echo"Number of Devices: " . $rowCount - 1 . "<br>";
 												}												
 												else {
@@ -220,6 +239,13 @@ if ($conn->connect_error) {
 				$("#deviceTable").toggle();
 			});
 			});
+			function logout() {
+			// Delete the cookie by setting its expiration date to the past
+			document.cookie = "my_cookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+			// Redirect the user to index.php
+			window.location.href = "index.php";
+			}
 			</script>
 
 	</body>

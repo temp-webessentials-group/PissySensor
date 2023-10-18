@@ -69,6 +69,10 @@ if ($conn->connect_error) {
 		table.centered th {
 			text-align: center;
 		}
+
+        .button-container {
+			text-align: center;
+		}
     </style>
 </head>
 <body class="is-preload">
@@ -81,15 +85,34 @@ if ($conn->connect_error) {
         <a href="index.php" class="logo">Smark Air</a>
     </header>
 
-    <!-- Nav -->
-    <nav id="nav">
-        <ul class="links">
-            <li><a href="index.php">Air Quality</a></li>
-            <li><a href="registration.html">User Registration</a></li>
-            <li><a href="elements.html">Documentation</a></li>
-            <li><a href="#" onclick="logout()">Logout</a></li>
-        </ul>
-    </nav>
+					<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.php">Air Quality</a></li>
+							<li><a href="Registration_new.php">User Registration</a></li>
+							<li><a href="elements.php">Documentation</a></li>
+
+							<?php
+							if (isset($_COOKIE['my_cookie'])) {
+
+								$cookieValue = $_COOKIE['my_cookie'];
+								$cookieValues = explode('|', $cookieValue);
+								$did = $cookieValues[6];
+
+								if ($did == "99999") {
+									echo '<li class="active"><a href="admin.php">Portal Page</a></li>'; 
+								} else {
+									echo '<li class="active"><a href="user.php">Portal Page</a></li>'; 
+								}
+								echo '<li><a href="#" onclick="logout()">Logout</a></li>';
+							}
+							else{
+								echo '<li><a href="login_new.php">Login</a></li>';
+							}
+							?>
+						</ul>
+						
+					</nav>
 
     <!-- Main -->
     <div id="main">
@@ -127,7 +150,7 @@ if (isset($_COOKIE['my_cookie'])) {
             // Start a div container with CSS styles for centering.
             echo "<div style='text-align: center;'>";
             echo "<H2>Welcome, " . $fname . "</H2>";
-            echo "<H3>Here are the records from your device</H3>";
+            echo "<H3>Here are the records from your device in Ward".$loc."</H3>";
             // Start an HTML table.
             echo "<table class='centered' border='1' style='font-size: 14px;'>";
             echo "<tr><th>Index 1</th><th>Index 2</th><th>Index 3</th><th>Index 4</th><th>Date</th><th>Time</th></tr>";
@@ -174,8 +197,14 @@ if (isset($_COOKIE['my_cookie'])) {
             }
             echo "</div>";
 
-			            // Close the div container.
-						echo "</div>";
+            echo '<div class="button-container">';
+            echo "<br>";
+            echo '<a href="user.php">Back to Portal Page</a>';
+            echo '</div>';
+            
+			// Close the div container.
+			echo "</div>";
+
         } else {
             echo "No data found in the table.";
         }
