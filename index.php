@@ -119,12 +119,12 @@ if ($conn->connect_error) {
 						<a href="index.php" class="logo">Smark Air</a>
 					</header>
 
-				<!-- Nav -->
+					<!-- Nav -->
 					<nav id="nav">
 						<ul class="links">
-							<li class="active"><a href="index.php">Air Quality</a></li>
-							<li><a href="Registration.html">User Registration</a></li>
-							<li><a href="elements.html">Documentation</a></li>
+							<li><a href="index.php">Air Quality</a></li>
+							<li><a href="Registration_new.php">User Registration</a></li>
+							<li><a href="elements.php">Documentation</a></li>
 
 							<?php
 							if (isset($_COOKIE['my_cookie'])) {
@@ -134,18 +134,16 @@ if ($conn->connect_error) {
 								$did = $cookieValues[6];
 
 								if ($did == "99999") {
-									echo '<li><a href="admin.php">Portal Page</a></li>'; 
+									echo '<li class="active"><a href="admin.php">Portal Page</a></li>'; 
 								} else {
-									echo '<li><a href="user.php">Portal Page</a></li>'; 
+									echo '<li class="active"><a href="user.php">Portal Page</a></li>'; 
 								}
 								echo '<li><a href="#" onclick="logout()">Logout</a></li>';
 							}
 							else{
-								echo '<li><a href="login.html">Login</a></li>';
+								echo '<li><a href="login_new.php">Login</a></li>';
 							}
 							?>
-
-<!--							<li><a href="login.html">Login</a></li> -->
 						</ul>
 						
 					</nav>
@@ -160,114 +158,11 @@ if ($conn->connect_error) {
 									<p>This is the current air quality found in the city of Calgary.This information is broken </br> 
 									down into the city wards </p>
 								</header>
-								<table>
-									<tr>
-									  <td class="left-cell">
-										<table>
-											<tr>
-											  <td class="left-cell">
-												<table>
-													<tr>
-														<td>Area</td>
-														<td>Quality Index</td>
-													</tr>
+						<div id="table-container">
 
-													<?php
-									// An array of table names
-									$tables = [
-										'ward1_record',
-										'ward2_record',
-										'ward3_record',
-										'ward4_record',
-										'ward5_record',
-										'ward6_record',
-										'ward7_record',
-										'ward8_record',
-										'ward9_record',
-										'ward10_record',
-										'ward11_record',
-										'ward12_record',
-										'ward13_record',
-										'ward14_record'
-									];
-
-									$wardNames = [
-										'Ward 1',
-										'Ward 2',
-										'Ward 3',
-										'Ward 4',
-										'Ward 5',
-										'Ward 6',
-										'Ward 7',
-										'Ward 8',
-										'Ward 9',
-										'Ward 10',
-										'Ward 11',
-										'Ward 12',
-										'Ward 13',
-										'Ward 14'
-									];
-
-									foreach ($tables as $key => $table) {
-										// SQL query to retrieve data from the current table
-										$sql = "SELECT * FROM $table ORDER BY date DESC, time DESC LIMIT 1";
-
-										// Execute the query
-										$result = $conn->query($sql);
-
-										// Check if any rows were returned
-										if ($result->num_rows > 0) {
-											// Output data for each row
-											while ($row = $result->fetch_assoc()) {
-												$index1 = $row["index1"];
-												$index2 = $row["index2"];
-												$index3 = $row["index3"];
-												$index4 = $row["index4"];
-												$date = $row["date"];
-												$time = $row["time"];
-
-												// Process and display data as needed
-												echo "<tr>";
-												echo "<td>{$wardNames[$key]}</td>";
-												echo "<td><div class='tooltip'>";
-
-												if ($index1 < 51) {
-													echo "<p style='color:green; font-weight: bold; text-align: center; margin-bottom: 0.2em;'>Good</p>";
-												} else if ($index1 > 50 && $index1 < 81) {
-													echo "<p style='color:orange; font-weight: bold; text-align: center; margin-bottom: 0.2em;'>Moderate</p>";
-												} else if ($index1 > 80 ){
-													echo "<p style='color:red; font-weight: bold; text-align: center; margin-bottom: 0.2em;'>Unhealthy</p>";
-												}
-
-												echo "<span class='tooltiptext'>";
-												echo "Index 1: $index1<br>";
-												echo "Index 2: $index2<br>";
-												echo "Index 3: $index3<br>";
-												echo "Index 4: $index4<br>";
-												echo "</br><span style='font-size: smaller;'>Last Update: )</span>";
-												echo "Data: $date<br>";
-												echo "Time: $time<br>";
-												echo "</span>";
-												echo "</div></td></tr>";
-											}
-										} else {
-											echo "No data found in table $table.<br>";
-										}
-									}
-
-									// Close the database connection
-									$conn->close();
-									?>
-												  </tr>
-												</table> 
-											  </td>
-											</tr>
-										  </table>
-
-									  </td>
-									  <td class="right-cell"><img src="images/map-min.jpg" alt="" /></td>
-									</tr>
-								  </table>
+								<!-- The table will be placed here -->
+								
+						</div>
 								
 							</article>
 
@@ -405,5 +300,24 @@ if ($conn->connect_error) {
 			window.location.href = "index.php";
 			}
 			</script>
+
+			<script>
+				function updateTable() {
+					// Make an AJAX request to fetch the latest data from your server-side script
+					$.ajax({
+						url: 'fetch_data.php', // Replace with the URL of your server-side script
+						type: 'GET',
+						dataType: 'html',
+						success: function (data) {
+							// Update the table with the new data
+							$('#table-container').html(data);
+						},
+					});
+				}
+
+				// Call the updateTable function every X milliseconds (e.g., 5000ms = 5 seconds)
+				setInterval(updateTable, 5000); // Adjust the interval as needed
+			</script>
+
 	</body>
 </html>

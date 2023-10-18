@@ -120,115 +120,45 @@ if ($conn->connect_error) {
 						<!-- Post -->
 							<section class="post">
 								<header class="major">
-									<h1>Welcome</h1>
+									<h1>USER REGISTRATION</h1>
 								</header>
+						
+                                <!-- Form -->
+                                <form method="post" action="Registration.php">
+										<label for="email"><b>Email Address</b></label>
+										<input type="email" placeholder="Email" name="email" required>
+								
+										<label for="psw"><b>Password (at least 8 characters with ONE digits)</b></label>
+										<input type="password" placeholder="Password" name="psw" id="password" required pattern="^(?=.*\d).{8,}$">
+										<input type="password" placeholder="Confirm Password" name="cpsw" id="password" required pattern="^(?=.*\d).{8,}$">
 
-									
-										<?php
-										// Check if the "my_cookie" cookie is set
-										if (isset($_COOKIE['my_cookie'])) {
-											// Get the cookie value and split it into individual values
-											$cookieValue = $_COOKIE['my_cookie'];
-											$cookieValues = explode('|', $cookieValue);
-											$uid = $cookieValues[0];
-											$did = $cookieValues[6];
+										<label for="name"><b>Name</b></label>
+										<input type="Name" placeholder="First Name" name="last_name" required>
+										<input type="Name" placeholder="Last Name" name="first_name" required> 
 
+										<label for="serialNumber">Device Serial Number:</label>
+										<input type="text" id="serialNumber" name="dev_id">
 
-											if ($did > 00000 && $did < 100000){
-//												echo "<p>You are allow to access this page</p>";
-												
-												$sql = "SELECT * FROM user_info join device_info on user_info.dev_id = device_info.dev_id where device_info.dev_id = $did;";
-												$result = $conn->query($sql);
-
-												if ($result->num_rows > 0) {
-													
-													while ($row = $result->fetch_assoc()) {
-//														echo "<tr>";
-//														echo "<td>" . $row["user_id"] . "</td>";
-//														echo "<td>" . $row["password"] . "</td>";
-//														echo "<td>" . $row["first_name"] . "</td>";
-//														echo "<td>" . $row["last_name"] . "</td>";
-//														echo "<td>" . $row["email"] . "</td>";
-//														echo "<td>" . $row["loc"] . "</td>";
-//														echo "<td>" . $row["dev_id"] . "</td>";
-//														echo "<td>" . $row["dev_serial"] . "</td>";
-//														echo "</tr>";
-
-								echo '<header>';
-									echo '<h2>Hi '.$row["first_name"].', This is your profile page</h2>';
-								echo '</header>';
-
-														echo '<form method="post" action="profileupdate_check.php">';
-																echo '<div class="field">';
-																	echo '<label for="fname">First Name</label>';
-																	echo '<input type="text" name="fname" id="fname" value=' .$row["first_name"] . '>';
-																echo '</div>';
-																echo '<div class="field">';
-																	echo '<label for="lname">Last Name</label>';
-																	echo '<input type="text" name="lname" id="lname" value=' .$row["last_name"] . '>';
-																echo '</div>';
-																echo '<div class="field">';
-																	echo '<label for="email">Email</label>';
-																	echo '<input type="text" name="email" id="email" value=' .$row["email"] . '>';
-																echo '</div>';
-																echo '<div class="field">';
-																	echo '<label for="loc">Ward</label>';
-																	echo '<select name="loc" id="loc">';
-																	for ($i = 1; $i <= 14; $i++) {
-																		echo '<option value="' . $i . '"';
-																		if ($i == $row["loc"]) {
-																			echo ' selected';
-																			}
-																		echo '>' . $i . '</option>';
-																	}
-																	echo '</select>';
-																echo '</div>';
-																echo '<div class="field">';
-																	echo '<label for="dev_id">Device Serial Number</label>';
-																	echo '<input type="text" name="dev_id" id="dev_id" value="' . $row["dev_serial"] . '" readonly style="color: grey;">';
-																echo '</div>';																		
-																echo '<div class="button-container">';
-																echo '</br>';
-																echo '<input type="submit" value="Change" style="margin-right: 30px;" />';
-																echo '<input type="button" value="Back" onclick="goBack()" />';
-																echo '</div>';
-
-														echo '</form>';
-
-														echo '<header>';
-															echo '<br>';
-															echo '<h2>Password change is here !!!</h2>';
-														echo '</header>';
-
-														echo '<form method="post" action="password.php">';
-														echo '<label for="old_password">Old Password:</label>';
-														echo '<input type="password" name="old_password" id="old_password" required>';
-												
-														echo '<label for="new_password">New Password (at least 8 characters with ONE digits):</label>';
-														echo '<input type="password" name="new_password" id="new_password" required pattern="^(?=.*\d).{8,}$">';
-														echo '<!-- pattern="^(?=.*\d).{8,}$" enforces at least 8 characters or digits -->';
-												
-														echo '<label for="confirm_password">Confirm New Password:</label>';
-														echo '<input type="password" name="confirm_password" id="confirm_password" required>';
-												
-														echo '<div class="button-container">';
-														echo '<br>';
-														echo '<input type="submit" value="Change Password" style="margin-right: 30px;" />';
-														echo '</div>';
-														echo '</form>';
-
-													}
-
-												} else {
-													echo "No Record";
-												}
-
-											}
-										} else {
-											// No cookie found, display a message
-											echo "<p>You are NOT ALLOW to access this page</p>";
-										}
-										?>
+                                        <label for="location">Ward: <a href="/images/map-min.jpg"><i>(Please click here for the information of Ward)</i></a></label>
+                                        <select name="location" id="location" required>
+                                            <option value="1">Ward 1</option>
+                                            <option value="2">Ward 2</option>
+                                            <option value="3">Ward 3</option>
+                                            <option value="4">Ward 4</option>
+                                            <option value="5">Ward 5</option>
+                                            <option value="6">Ward 6</option>
+                                            <option value="7">Ward 7</option>
+                                            <option value="8">Ward 8</option>
+                                            <option value="9">Ward 9</option>
+                                            <option value="10">Ward 10</option>
+                                            <option value="11">Ward 11</option>
+                                            <option value="12">Ward 12</option>
+                                            <option value="13">Ward 13</option>
+                                            <option value="14">Ward 14</option>
+                                        </select>
+										<button id="SignUpButton" input type="submit" value="Registration">Sign Up</button>
+									</form>
+                                    By creating an account you agree to our Terms & Privacy.
 
 					</div>
 

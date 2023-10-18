@@ -1,34 +1,3 @@
-<?php
-$host = "localhost";
-$username = "db_francci";
-$password = "6S#BN%5sfg";
-$dbname = "db_francci";
-
-// Create a database connection
-$conn = new mysqli($host, $username, $password, $dbname);
-
-// Check the connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-?>
-
-<script>
-	function populateForm() {
-	var select = document.getElementById("user_select");
-	var form = document.getElementById("edit_form");
-
-	var selectedOption = select.options[select.selectedIndex];
-	var userId = selectedOption.value;
-	var firstName = selectedOption.getAttribute("data-firstname");
-	var lastName = selectedOption.getAttribute("data-lastname");
-	form.querySelector("#edit_user_id").value = userId;
-	form.querySelector("#edit_first_name").value = firstName;
-	form.querySelector("#edit_last_name").value = lastName;
-	// Populate other user information fields as needed
-	}
-</script>
-
 <!DOCTYPE HTML>
 <!--
 	Massively by HTML5 UP
@@ -37,7 +6,7 @@ if ($conn->connect_error) {
 -->
 <html>
 	<head>
-		<title>User Admin</title>
+		<title>Login</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -82,55 +51,29 @@ if ($conn->connect_error) {
 						
 					</nav>
 
-				<!-- Main -->
 					<div id="main">
-
 						<!-- Post -->
-							<section class="post">
-								<header class="major">
-									<h1>User Reset Portal</h1>
-								</header>
-
-								<!-- Text stuff -->
-									<h2>Choose a User to edit: </h2>
-								<!-- Form -->
-								<?php
-								
-
-								$sql = "SELECT first_name, last_name FROM user_info";
-								$result = $conn->query($sql);
-								if (!$result) {
-									die("Error: " . $conn->error);
-								}
-								?>
-								
-								<select name="user_info" id="user_id" onchange="populateForm()">
-									<?php
-										while ($row = $result->fetch_assoc()) {
-										echo '<option value="' . $row['user_id'] . '" data-firstname="' . $row['first_name'] . '" data-lastname="' . $row['last_name'] . '">' . $row['first_name'] . ' ' . $row['last_name'] . '</option>';
-									}
-									?>
-
-								</select>
-
-								<form id="edit_form">
-									<input type="hidden" name="user_id" id="edit_user_id">
-									<label for="edit_first_name">First Name:</label>
-									<input type="text" name="edit_first_name" id="edit_first_name"><br>
-									<label for="edit_last_name">Last Name:</label>
-									<input type="text" name="edit_last_name" id="edit_last_name"><br>
-									<label for="edit_email_address">Email Address:</label>
-									<input type="email" name="edit_email_address" id="edit_email_address"><br>
-								<!-- Add other user information fields here -->
-								<input type="submit" value="Update User Information">
+						<section class="post">
+							<header class="major">
+								<h1>Login</h1>
+								<!-- Add the form element with action attribute -->
+								<form method="post" action="login.php" onsubmit="return validateForm()">
+									<div>
+										<label for="email"><b>Email Address</b></label>
+										<input type="text" placeholder="Email" name="email" id="email" required>
+					
+										<label for="psw"><b>Password</b></label>
+										<input type="password" placeholder="Password" name="psw" required>
+					
+										<br />
+										<!-- Change the button type to "submit" -->
+										<button type="submit" class="signupbtn">Login</button>
+									</div>
 								</form>
-
-								<?php
-								$conn->close();
-								?>
-
-
+							</header>
+						</section>
 					</div>
+
 
 				<!-- Footer -->
 					<footer id="footer">
@@ -169,7 +112,6 @@ if ($conn->connect_error) {
 								<h3>Email</h3>
 								<p><a href="#">info@untitled.tld</a></p>
 							</section>
-							
 						</section>
 					</footer>
 
@@ -188,6 +130,19 @@ if ($conn->connect_error) {
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+				function validateForm() {
+					var email = document.getElementById("email").value;
+					var atposition = email.indexOf("@");
+					var dotposition = email.lastIndexOf(".");
+			
+					if (atposition < 1 || dotposition < atposition + 2 || dotposition + 2 >= email.length) {
+						alert("Please enter a valid email address");
+						return false;
+					}
+					return true;
+				}
+			</script>
 
 	</body>
 </html>
