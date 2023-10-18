@@ -26,7 +26,7 @@ def send_data(nh3, pm):
         
     pm_data.clear() # clear list
         
-pm = PM.pmsensor()
+
 
 
 while True:
@@ -34,7 +34,7 @@ while True:
     pm = PM.pmsensor()
     
     #testing to send data for particulates
-    pm_data.append(f"{pm['value1']},{pm['value2']}") #append to list
+    
     #print(pm_data)
     
 
