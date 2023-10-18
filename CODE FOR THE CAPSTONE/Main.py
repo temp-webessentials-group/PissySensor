@@ -37,6 +37,10 @@ while True:
     pm_data.append(pm) #append to list
     #print(pm_data)
     
+    for pm_element in  pm_data:
+        pm_values = pm_element.split(',')
+        print(pm_values)
+    
     for pm_value in pm_data:
         #send data
         send_data(nh3, pm_value)
