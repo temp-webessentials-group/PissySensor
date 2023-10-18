@@ -86,13 +86,32 @@ if ($conn->connect_error) {
 					</header>
 
 				<!-- Nav -->
-					<nav id="nav">
+				<nav id="nav">
 						<ul class="links">
 							<li><a href="index.php">Air Quality</a></li>
-							<li><a href="registration.html">User Registration</a></li>
+							<li><a href="Registration.html">User Registration</a></li>
 							<li><a href="elements.html">Documentation</a></li>
-							<li><a href="#" onclick="logout()">Logout</a></li>
+
+							<?php
+							if (isset($_COOKIE['my_cookie'])) {
+
+								$cookieValue = $_COOKIE['my_cookie'];
+								$cookieValues = explode('|', $cookieValue);
+								$did = $cookieValues[6];
+
+								if ($did == "99999") {
+									echo '<li class="active"><a href="admin.php">Portal Page</a></li>'; 
+								} else {
+									echo '<li class="active"><a href="user.php">Portal Page</a></li>'; 
+								}
+								echo '<li><a href="#" onclick="logout()">Logout</a></li>';
+							}
+							else{
+								echo '<li><a href="login.html">Login</a></li>';
+							}
+							?>
 						</ul>
+						
 					</nav>
 
 				<!-- Main -->
@@ -140,7 +159,6 @@ if ($conn->connect_error) {
 								echo '</header>';
 
 														echo '<form method="post" action="profileupdate_check.php">';
-//															echo '<div class="fields">';
 																echo '<div class="field">';
 																	echo '<label for="fname">First Name</label>';
 																	echo '<input type="text" name="fname" id="fname" value=' .$row["first_name"] . '>';
@@ -170,18 +188,33 @@ if ($conn->connect_error) {
 																	echo '<input type="text" name="dev_id" id="dev_id" value="' . $row["dev_serial"] . '" readonly style="color: grey;">';
 																echo '</div>';																		
 																echo '<div class="button-container">';
-//																	echo '<input type="submit" value="Submit" />';
-//																echo '</div>';
-//																echo '<div class="button-container">';
-//																	echo '<input type="button" value="Back" onclick="goBack()" />';
-//																echo '</div>';
-//																echo '<ul class="actions center-buttons">'; 
 																echo '</br>';
 																echo '<input type="submit" value="Change" style="margin-right: 30px;" />';
 																echo '<input type="button" value="Back" onclick="goBack()" />';
-//																echo '</ul>';
 																echo '</div>';
 
+														echo '</form>';
+
+														echo '<header>';
+															echo '<br>';
+															echo '<h2>Password change is here !!!</h2>';
+														echo '</header>';
+
+														echo '<form method="post" action="password.php">';
+														echo '<label for="old_password">Old Password:</label>';
+														echo '<input type="password" name="old_password" id="old_password" required>';
+												
+														echo '<label for="new_password">New Password (at least 8 characters with ONE digits):</label>';
+														echo '<input type="password" name="new_password" id="new_password" required pattern="^(?=.*\d).{8,}$">';
+														echo '<!-- pattern="^(?=.*\d).{8,}$" enforces at least 8 characters or digits -->';
+												
+														echo '<label for="confirm_password">Confirm New Password:</label>';
+														echo '<input type="password" name="confirm_password" id="confirm_password" required>';
+												
+														echo '<div class="button-container">';
+														echo '<br>';
+														echo '<input type="submit" value="Change Password" style="margin-right: 30px;" />';
+														echo '</div>';
 														echo '</form>';
 
 													}
@@ -268,6 +301,7 @@ if ($conn->connect_error) {
 			// Use the history object to go back one page in the browsing history
 			window.history.back();
 			}
-</script>
+			</script>
+
 	</body>
 </html>
