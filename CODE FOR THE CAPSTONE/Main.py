@@ -6,7 +6,7 @@ import requests
 pm_data = [] #empty list
 
 def send_data(nh3, pm):
-    url = 'http://groupalpha.ca/'
+    url = 'http://groupalpha.ca/api.php'
     data = {
         'ammonia' : nh3,
         'particulate' : pm
