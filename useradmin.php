@@ -22,11 +22,19 @@ if ($conn->connect_error) {
 	var userId = selectedOption.value;
 	var firstName = selectedOption.getAttribute("data-firstname");
 	var lastName = selectedOption.getAttribute("data-lastname");
+	var email = selectedOption.getAttribute("data-email");
+
 	form.querySelector("#edit_user_id").value = userId;
 	form.querySelector("#edit_first_name").value = firstName;
 	form.querySelector("#edit_last_name").value = lastName;
-	// Populate other user information fields as needed
+	form.querySelector("#edit_email").value = email;
+
+	console.log("User ID: " + userId);
+    console.log("First Name: " + firstName);
+    console.log("Last Name: " + lastName);
+    console.log("Email: " + email);
 	}
+
 </script>
 
 <!DOCTYPE HTML>
@@ -53,31 +61,12 @@ if ($conn->connect_error) {
 						<a href="index.php" class="logo">Smark Air</a>
 					</header>
 
-					<!-- Nav -->
+				<!-- Nav -->
 					<nav id="nav">
 						<ul class="links">
 							<li><a href="index.php">Air Quality</a></li>
-							<li><a href="Registration_new.php">User Registration</a></li>
-							<li><a href="elements.php">Documentation</a></li>
-
-							<?php
-							if (isset($_COOKIE['my_cookie'])) {
-
-								$cookieValue = $_COOKIE['my_cookie'];
-								$cookieValues = explode('|', $cookieValue);
-								$did = $cookieValues[6];
-
-								if ($did == "99999") {
-									echo '<li class="active"><a href="admin.php">Portal Page</a></li>'; 
-								} else {
-									echo '<li class="active"><a href="user.php">Portal Page</a></li>'; 
-								}
-								echo '<li><a href="#" onclick="logout()">Logout</a></li>';
-							}
-							else{
-								echo '<li><a href="login_new.php">Login</a></li>';
-							}
-							?>
+							<li><a href="registration.html">User Registration</a></li>
+							<li><a href="elements.html">Documentation</a></li>
 						</ul>
 						
 					</nav>
@@ -94,36 +83,92 @@ if ($conn->connect_error) {
 								<!-- Text stuff -->
 									<h2>Choose a User to edit: </h2>
 								<!-- Form -->
-								<?php
-								
 
-								$sql = "SELECT first_name, last_name FROM user_info";
+								<?php
+								$sql = "SELECT * FROM user_info";
 								$result = $conn->query($sql);
 								if (!$result) {
 									die("Error: " . $conn->error);
 								}
 								?>
-								
-								<select name="user_info" id="user_id" onchange="populateForm()">
+							<div>
+								<select name="user_id" id="user_select" onchange="populateForm()">
 									<?php
 										while ($row = $result->fetch_assoc()) {
-										echo '<option value="' . $row['user_id'] . '" data-firstname="' . $row['first_name'] . '" data-lastname="' . $row['last_name'] . '">' . $row['first_name'] . ' ' . $row['last_name'] . '</option>';
-									}
+											echo '<option value="' . $row['user_id'] . '" data-firstname="' . $row['first_name'] . '" data-lastname="' . $row['last_name'] . '" data-email="' . $row['email'] . '">' . $row['first_name'] . ' ' . $row['last_name'] . ' </option>';
+										}
 									?>
-
 								</select>
+							</div>
+							
 
-								<form id="edit_form">
+								<form method = "post" id="edit_form">
 									<input type="hidden" name="user_id" id="edit_user_id">
 									<label for="edit_first_name">First Name:</label>
 									<input type="text" name="edit_first_name" id="edit_first_name"><br>
 									<label for="edit_last_name">Last Name:</label>
 									<input type="text" name="edit_last_name" id="edit_last_name"><br>
-									<label for="edit_email_address">Email Address:</label>
-									<input type="email" name="edit_email_address" id="edit_email_address"><br>
+									<label for="edit_email">Email:</label>
+									<input type="email" name="edit_email" id="edit_email"><br>
+									
 								<!-- Add other user information fields here -->
 								<input type="submit" value="Update User Information">
 								</form>
+							<?php
+								$sql = "SELECT * FROM user_info";
+								$result = $conn->query($sql);
+								if (!$result) {
+									die("Error: " . $conn->error);
+								}
+							?>
+								
+							<h2> Change User Password Here</h2>
+							<h2>Choose a User to edit: </h2>
+
+								<div>
+								<select name="user_id" id="pass_select" onchange="populateForm()">
+									<?php
+										while ($row = $result->fetch_assoc()) {
+											echo '<option value="' . $row['user_id'] . '" data-firstname="' . $row['first_name'] . '" data-lastname="' . $row['last_name'] . '" data-email="' . $row['email'] . '">' . $row['first_name'] . ' ' . $row['last_name'] . ' </option>';
+										}
+									?>
+								</select>
+							</div>
+							<div id="password_change_section">
+								<form method="post" action="admin_change_password.php">
+								<input type="hidden" name="user_id" id="admin_password_user_id">
+								<label for="admin_new_password">New Password:</label>
+								<input type="password" name="admin_new_password" id="admin_new_password">
+								<input type="submit" value="Change User Password">
+							</form>
+
+							</div>
+								<?php
+								if ($_SERVER["REQUEST_METHOD"] == "POST") {
+									$user_id = $_POST["user_id"];
+										$new_first_name = $_POST["edit_first_name"];
+										$new_last_name = $_POST["edit_last_name"];
+										$new_email = $_POST["edit_email"];
+
+									// Update user information in the database
+									$sql = "UPDATE user_info SET first_name=?, last_name=?, email=? WHERE user_id=?";
+									$stmt = $conn->prepare($sql);
+									$stmt->bind_param("sssi", $new_first_name, $new_last_name, $new_email, $user_id);
+
+								if ($stmt->execute()) {
+									echo "User information updated successfully.";
+								} 
+								else {
+									echo "Error updating user information: " . $stmt->error;
+								}
+
+								$stmt->close();
+								}
+
+								?>
+								
+
+
 
 								<?php
 								$conn->close();
