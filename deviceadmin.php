@@ -41,8 +41,8 @@ if ($conn->connect_error) {
 					<nav id="nav">
 						<ul class="links">
 							<li><a href="index.php">Air Quality</a></li>
-							<li><a href="Registration.html">User Registration</a></li>
-							<li><a href="elements.html">Documentation</a></li>
+							<li><a href="Registration_new.php">User Registration</a></li>
+							<li><a href="elements.php">Documentation</a></li>
 
 							<?php
 							if (isset($_COOKIE['my_cookie'])) {
@@ -85,30 +85,17 @@ if ($conn->connect_error) {
 
 											if ($did == "99999"){
 												// Allow access to the page
-												echo "<p>You are allow to access this page</p>";
-												
-											}
-											else {
-												echo "<p>You are NOT ALLOWED to access this page</p>";
-											}
-										}
-											
-									?>
-
-
-								<h2>Inventory</h2>
-									
-								<?php
-									$sql = "SELECT d.dev_id, d.dev_serial, 
-										CASE 
-										WHEN u.dev_id IS NOT NULL THEN 'Registered' 
-										ELSE 'Not Registered' 
-										END AS registration_status 
-										FROM device_info AS d 
-										LEFT JOIN user_info AS u 
-										ON d.dev_id = u.dev_id 
-										ORDER BY d.dev_id";
-									$result = $conn->query($sql);
+												echo "<h2>Inventory</h2>";
+												$sql = "SELECT d.dev_id, d.dev_serial, 
+													CASE 
+													WHEN u.dev_id IS NOT NULL THEN 'Registered' 
+													ELSE 'Not Registered' 
+													END AS registration_status 
+													FROM device_info AS d 
+													LEFT JOIN user_info AS u 
+													ON d.dev_id = u.dev_id 
+													ORDER BY d.dev_id";
+										$result = $conn->query($sql);
 
 									if ($result->num_rows > 0) {
 										echo "<table>";
@@ -125,6 +112,13 @@ if ($conn->connect_error) {
 										else {
 											echo "No records found";
 										}
+												
+											}
+											else {
+												echo "<p>You are NOT ALLOWED to access this page</p>";
+											}
+										}
+											
 									?>
 
 
