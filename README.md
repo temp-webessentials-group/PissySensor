@@ -7,6 +7,6 @@ Nathon Anderson
 Sam Nixon
 Wai Frankie Ha
 
-# Portable Air Quality Monitor
+# Documentation
 
 
