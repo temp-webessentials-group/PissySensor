@@ -1,7 +1,7 @@
 <?php
-$host = "localhost";
-$username = "db_francci";
-$password = "6S#BN%5sfg";
+$host = "ls-5d65c83575404b171779b0657bc9f2f90f9cf69e.cjvvc5r4aih0.us-east-1.rds.amazonaws.com";
+$username = "dbmasteruser";
+$password = "{<g]+q6WsOLnzt].e4`Nb#g%[z<8Jnfa";
 $dbname = "db_francci";
 
 // Create a database connection
@@ -13,6 +13,7 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $uid = $_POST["uid"];
     $fname = $_POST["fname"];
     $lname = $_POST["lname"];
     $email = $_POST["email"];
@@ -24,9 +25,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Invalid email address. Please enter a valid email address.";
         exit; // Stop further processing if the email is invalid
     }
-
-    // Assuming $uid is the user's ID, retrieved from the session or cookie
-    $uid = $_COOKIE['my_cookie'];
 
     // Update the user's profile
     $sql = "UPDATE user_info SET first_name='$fname', last_name='$lname', email='$email', loc='$loc' WHERE user_id='$uid'";
