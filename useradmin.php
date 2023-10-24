@@ -23,16 +23,19 @@ if ($conn->connect_error) {
 	var firstName = selectedOption.getAttribute("data-firstname");
 	var lastName = selectedOption.getAttribute("data-lastname");
 	var email = selectedOption.getAttribute("data-email");
+	var password = selectedOption.getAttribute("data-password");
+
 
 	form.querySelector("#edit_user_id").value = userId;
 	form.querySelector("#edit_first_name").value = firstName;
 	form.querySelector("#edit_last_name").value = lastName;
-	form.querySelector("#edit_email").value = email;
+	form.querySelector("#edit_email").value = password;
 
 	console.log("User ID: " + userId);
     console.log("First Name: " + firstName);
     console.log("Last Name: " + lastName);
     console.log("Email: " + email);
+	console.log("Password: " + email);
 	}
 
 </script>
@@ -129,13 +132,13 @@ if ($conn->connect_error) {
 								<select name="user_id" id="pass_select" onchange="populateForm()">
 									<?php
 										while ($row = $result->fetch_assoc()) {
-											echo '<option value="' . $row['user_id'] . '" data-firstname="' . $row['first_name'] . '" data-lastname="' . $row['last_name'] . '" data-email="' . $row['email'] . '">' . $row['first_name'] . ' ' . $row['last_name'] . ' </option>';
+											echo '<option value="' . $row['user_id'] . '" data-firstname="' . $row['first_name'] . '" data-lastname="' . $row['last_name'] . '" data-password="' . $row['password'] . '">' . $row['first_name'] . ' ' . $row['last_name'] . ' </option>';
 										}
 									?>
 								</select>
 							</div>
 							<div id="password_change_section">
-								<form method="post" action="admin_change_password.php">
+								<form method="post" id="admin_change_password">
 								<input type="hidden" name="user_id" id="admin_password_user_id">
 								<label for="admin_new_password">New Password:</label>
 								<input type="password" name="admin_new_password" id="admin_new_password">
