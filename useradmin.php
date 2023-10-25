@@ -138,11 +138,12 @@ if ($conn->connect_error) {
 								</select>
 							</div>
 							<div id="password_change_section">
-								<form method="post" id="admin_change_password">
+								
+							<form method="post" action="adminpassword.php">
 								<input type="hidden" name="user_id" id="admin_password_user_id">
 								<label for="admin_new_password">New Password:</label>
 								<input type="password" name="admin_new_password" id="admin_new_password">
-								<input type="submit" value="Change User Password">
+								<input type="submit" name="submit" value="Change User Password">
 							</form>
 
 							</div>
