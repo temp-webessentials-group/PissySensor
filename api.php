@@ -1,58 +1,42 @@
 <?php
-$host = "localhost";
-$username = "db_francci";
-$password = "6S#BN%5sfg";
+// MySQL database configuration
+$host = "ls-5d65c83575404b171779b0657bc9f2f90f9cf69e.cjvvc5r4aih0.us-east-1.rds.amazonaws.com";
+$username = "dbmasteruser";
+$db_password = "{<g]+q6WsOLnzt].e4`Nb#g%[z<8Jnfa";
 $dbname = "db_francci";
 
-// Create a database connection
-$conn = new mysqli($host, $username, $password, $dbname);
+// Read the JSON data from the request body
+$data = file_get_contents('php://input');
+$jsonData = json_decode($data, true);
 
-// Check the connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+if ($jsonData !== null) {
+    // Create a MySQL database connection
+    $conn = new mysqli($host, $username, $db_password, $dbname);
 
-// Check if the request is a POST request
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Read the POST data
-    $post_data = file_get_contents("php://input");
-
-    // Parse the JSON data
-    $data = json_decode($post_data, true);
-
-    if ($data === null) {
-        // JSON parsing failed
-        http_response_code(400); // Bad Request
-        echo json_encode(array("message" => "Invalid JSON data"));
-    } else {
-        // Data received successfully
-        // Access the ammonia and particulate data
-        $ammonia = $data['ammonia'];
-        $particulate = $data['particulate'];
-
-        // Insert data into the 'testapi' table
-        $insert_query = "INSERT INTO testapi (ammonia, particulate) VALUES (?, ?)";
-        $stmt = $conn->prepare($insert_query);
-        $stmt->bind_param("dd", $ammonia, $particulate);
-
-        if ($stmt->execute()) {
-            // Data inserted successfully
-            http_response_code(200); // OK
-            echo json_encode(array("message" => "Data received and inserted into the database"));
-        } else {
-            // Error inserting data
-            http_response_code(500); // Internal Server Error
-            echo json_encode(array("message" => "Error inserting data into the database"));
-        }
-        
-        $stmt->close();
+    // Check the connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
-} else {
-    // Invalid request method
-    http_response_code(405); // Method Not Allowed
-    echo json_encode(array("message" => "Method not allowed"));
-}
 
-// Close the database connection
-$conn->close();
+    // Insert the data into the "testapi" table
+    $index1 = $jsonData['index1'];
+    $index2 = $jsonData['index2'];
+    $index3 = $jsonData['index3'];
+    $index4 = $jsonData['index4'];
+    $index5 = $jsonData['index5'];
+
+    $sql = "INSERT INTO testapi (index1, index2, index3, index4, index5) 
+            VALUES ('$index1', '$index2', '$index3', '$index4', '$index5')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Data inserted successfully.";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    // Close the database connection
+    $conn->close();
+} else {
+    echo "Invalid JSON data received.";
+}
 ?>
