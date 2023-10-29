@@ -61,7 +61,9 @@
         // Close the database connection
         $conn->close();
         ?>
-        
+
+        var wardNumber = <?php echo $wardNumber; ?>; // Pass $wardNumber to JavaScript
+
         var options = {
           title: 'The air condition record for the last 30 days for Ward ' + wardNumber,
           hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
@@ -72,8 +74,8 @@
         chart.draw(data, options);
 
         // Display the ward number within a <p> element
-        var wardNumberElement = document.getElementById('wardNumber');
-        wardNumberElement.textContent = 'Ward Number: ' + wardNumber;
+        //var wardNumberElement = document.getElementById('wardNumber');
+        //wardNumberElement.textContent = 'Ward Number: ' + wardNumber;
       }
     </script>
   </head>
