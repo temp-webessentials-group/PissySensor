@@ -1,9 +1,9 @@
 <?php
 // Include your database connection code here if needed
 
-$host = "localhost";
-$username = "db_francci";
-$password = "6S#BN%5sfg";
+$host = "ls-5d65c83575404b171779b0657bc9f2f90f9cf69e.cjvvc5r4aih0.us-east-1.rds.amazonaws.com";
+$username = "dbmasteruser";
+$password = "{<g]+q6WsOLnzt].e4`Nb#g%[z<8Jnfa";
 $dbname = "db_francci";
 
 // Create a database connection
@@ -72,7 +72,8 @@ foreach ($tables as $key => $table) {
 
             // Process and append data to the tableHTML
             $tableHTML .= "<tr>";
-            $tableHTML .= "<td>{$wardNames[$key]}</td>";
+            // Add an onclick event to open a new popup window
+            $tableHTML .= "<td><a href='javascript:void(0);' onclick=\"openPopup('/chart.php?ward=$key')\">{$wardNames[$key]}</a></td>";
             $tableHTML .= "<td><div class='tooltip'>";
 
             if ($index1 < 51) {
@@ -97,6 +98,7 @@ foreach ($tables as $key => $table) {
     }
 }
 
+
 // Close the database connection
 $conn->close();
 
@@ -106,3 +108,16 @@ $tableHTML .= "</tr></table></td></tr></table></td><td class='right-cell'><img s
 // Echo the generated HTML
 echo $tableHTML;
 ?>
+
+<script>
+function openPopup(url) {
+    // Specify the window features (size, position, etc.)
+    var features = 'width=1200,height=600,location=no,menubar=no,status=no,toolbar=no,scrollbars=yes';
+
+    // Open a new popup window
+    var popupWindow = window.open(url, '_blank', features);
+    if (popupWindow) {
+        popupWindow.focus();
+    }
+}
+</script>
