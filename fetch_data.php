@@ -73,7 +73,7 @@ foreach ($tables as $key => $table) {
             // Process and append data to the tableHTML
             $tableHTML .= "<tr>";
             // Add an onclick event to open a new popup window
-            $tableHTML .= "<td><a href='javascript:void(0);' onclick=\"openPopup('/chart.php?ward=$key')\">{$wardNames[$key]}</a></td>";
+            $tableHTML .= "<td><a href='javascript:void(0);' onclick=\"openPopup('/chart.php?ward=" . ($key + 1) . "')\">{$wardNames[$key]}</a></td>";
             $tableHTML .= "<td><div class='tooltip'>";
 
             if ($index1 < 51) {
