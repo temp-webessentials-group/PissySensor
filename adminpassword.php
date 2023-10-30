@@ -1,7 +1,7 @@
 <?php
-$host = "localhost";
-$username = "db_francci";
-$password = "6S#BN%5sfg";
+$host = "ls-5d65c83575404b171779b0657bc9f2f90f9cf69e.cjvvc5r4aih0.us-east-1.rds.amazonaws.com";
+$username = "dbmasteruser";
+$password = "{<g]+q6WsOLnzt].e4`Nb#g%[z<8Jnfa";
 $dbname = "db_francci";
 
 // Create a database connection
