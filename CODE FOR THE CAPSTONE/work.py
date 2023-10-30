@@ -34,7 +34,7 @@ def getWeather():
 
 
 def sendData(somedata):
-    url = "http://www.groupalpha.ca/api.php"
+    url = "http://www.groupalpha.ca/sensor.php"
     try:
         response = requests.post(url, json=somedata)
         if response.status_code == 200:
