@@ -14,29 +14,31 @@ if ($conn->connect_error) {
 ?>
 
 <script>
-	function populateForm() {
-	var select = document.getElementById("user_select");
-	var form = document.getElementById("edit_form");
+	function populateUserInfoForm() {
+    var select = document.getElementById("user_select");
+    var form = document.getElementById("edit_form");
 
-	var selectedOption = select.options[select.selectedIndex];
-	var userId = selectedOption.value;
-	var firstName = selectedOption.getAttribute("data-firstname");
-	var lastName = selectedOption.getAttribute("data-lastname");
-	var email = selectedOption.getAttribute("data-email");
-	var password = selectedOption.getAttribute("data-password");
+    var selectedOption = select.options[select.selectedIndex];
+    var userId = selectedOption.value;
+    var firstName = selectedOption.getAttribute("data-firstname");
+    var lastName = selectedOption.getAttribute("data-lastname");
+    var email = selectedOption.getAttribute("data-email");
 
+    form.querySelector("#edit_user_id").value = userId;
+    form.querySelector("#edit_first_name").value = firstName;
+    form.querySelector("#edit_last_name").value = lastName;
+    form.querySelector("#edit_email").value = email;
+}
+function populatePasswordChangeForm() {
+    var passSelect = document.getElementById("pass_select");
+    var adminUserIdField = document.getElementById("admin_password_user_id");
 
-	form.querySelector("#edit_user_id").value = userId;
-	form.querySelector("#edit_first_name").value = firstName;
-	form.querySelector("#edit_last_name").value = lastName;
-	form.querySelector("#edit_email").value = password;
+    var selectedOption = passSelect.options[passSelect.selectedIndex];
+    var selectedUserId = selectedOption.value;
 
-	console.log("User ID: " + userId);
-    console.log("First Name: " + firstName);
-    console.log("Last Name: " + lastName);
-    console.log("Email: " + email);
-	console.log("Password: " + email);
-	}
+    adminUserIdField.value = selectedUserId;
+}
+
 
 </script>
 
@@ -68,8 +70,8 @@ if ($conn->connect_error) {
 					<nav id="nav">
 						<ul class="links">
 							<li><a href="index.php">Air Quality</a></li>
-							<li><a href="registration_new.php">User Registration</a></li>
-							<li><a href="elements.php">Documentation</a></li>
+							<li><a href="registration.html">User Registration</a></li>
+							<li><a href="elements.html">Documentation</a></li>
 						</ul>
 						
 					</nav>
@@ -95,7 +97,7 @@ if ($conn->connect_error) {
 								}
 								?>
 							<div>
-								<select name="user_id" id="user_select" onchange="populateForm()">
+								<select name="user_id" id="user_select" onchange="populateUserInfoForm()">
 									<?php
 										while ($row = $result->fetch_assoc()) {
 											echo '<option value="' . $row['user_id'] . '" data-firstname="' . $row['first_name'] . '" data-lastname="' . $row['last_name'] . '" data-email="' . $row['email'] . '">' . $row['first_name'] . ' ' . $row['last_name'] . ' </option>';
@@ -117,6 +119,7 @@ if ($conn->connect_error) {
 								<!-- Add other user information fields here -->
 								<input type="submit" value="Update User Information">
 								</form>
+
 							<?php
 								$sql = "SELECT * FROM user_info";
 								$result = $conn->query($sql);
@@ -128,18 +131,18 @@ if ($conn->connect_error) {
 							<h2> Change User Password Here</h2>
 							<h2>Choose a User to edit: </h2>
 
-								<div>
-								<select name="user_id" id="pass_select" onchange="populateForm()">
+							<div>
+								<select name="user_id" id="pass_select" onchange="populatePasswordChangeForm()">
 									<?php
 										while ($row = $result->fetch_assoc()) {
 											echo '<option value="' . $row['user_id'] . '" data-firstname="' . $row['first_name'] . '" data-lastname="' . $row['last_name'] . '" data-password="' . $row['password'] . '">' . $row['first_name'] . ' ' . $row['last_name'] . ' </option>';
 										}
 									?>
 								</select>
+
 							</div>
 							<div id="password_change_section">
-								
-							<form method="post" action="adminpassword.php">
+								<form method="post" action="adminpassword.php">
 								<input type="hidden" name="user_id" id="admin_password_user_id">
 								<label for="admin_new_password">New Password:</label>
 								<input type="password" name="admin_new_password" id="admin_new_password">
