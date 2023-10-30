@@ -2,17 +2,32 @@ import PM
 import gases
 import time
 import requests
+import re
 
-pm_data = [] #empty list
+#parse info from PM sensor
+def parse_pm_output(output):
+    parsed_data={}
+    
+    lines = output.split('\n')
+    
+    for line in lines: 
+        parts = line.split(':')
+        if len(parts) == 2:
+            parameter = parts[0].strip()
+            value = parts[1].strip()
+            parsed_data[parameter] = int(value)
+    
+    return parsed_data
 
-def send_data(nh3, pm):
-    url = 'http://groupalpha.ca/api.php'
+#send sensor data to web server
+def send_data(nh3, parsed_pm_data):
+    url = 'http://groupalpha.ca/'
     data = {
         'ammonia' : nh3,
-        'particulate' : pm
+        **parsed_pm_data
     }
     
-    #print('data')
+    print('data')
     
     try:
         response = requests.post(url, json=data)
@@ -24,21 +39,19 @@ def send_data(nh3, pm):
     except Exception as e:
         print(f'Error sending data: {str(e)}')
         
-    pm_data.clear() # clear list
-        
 
 
 
 while True:
     nh3 = gases.ammonia()
-    pm = PM.pmsensor()
+    pm_out = PM.pmsensor()
     
-    #testing to send data for particulates
+    #parse data
+    parsed_pm_data = parse_pm_output(pm_out)
     
-    #print(pm_data)
-    
+    #send sensor data
+    send_data(nh3, parsed_pm_data)
 
     
-    pm_data.clear()
-    
     time.sleep(5)
+    
