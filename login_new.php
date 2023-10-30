@@ -78,7 +78,7 @@
 				<!-- Footer -->
 					<footer id="footer">
 						<section>
-							<form method="post" action="#">
+							<form method="post" action="http://groupalpha.ca/send_email.php">
 								<div class="fields">
 									<div class="field">
 										<label for="name">Name</label>
