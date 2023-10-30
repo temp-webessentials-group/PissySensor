@@ -171,7 +171,7 @@ if ($conn->connect_error) {
 												}
 									?>
 									<ul class="actions special">
-										<li><a href="#" class="button primary">Device Management</a></li>
+										<li><a href="deviceadmin.php" class="button primary">Device Management</a></li>
 									</ul>
 								</article>
 					</div>
