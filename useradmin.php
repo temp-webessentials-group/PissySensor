@@ -70,8 +70,8 @@ function populatePasswordChangeForm() {
 					<nav id="nav">
 						<ul class="links">
 							<li><a href="index.php">Air Quality</a></li>
-							<li><a href="registration.html">User Registration</a></li>
-							<li><a href="elements.html">Documentation</a></li>
+							<li><a href="Registration_new.html">User Registration</a></li>
+							<li><a href="elements.php">Documentation</a></li>
 						</ul>
 						
 					</nav>
