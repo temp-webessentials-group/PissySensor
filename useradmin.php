@@ -240,6 +240,15 @@ function populatePasswordChangeForm() {
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+			function logout() {
+			// Delete the cookie by setting its expiration date to the past
+			document.cookie = "my_cookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+			// Redirect the user to index.php
+			window.location.href = "index.php";
+			}
+			</script>
 
 	</body>
 </html>
