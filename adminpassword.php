@@ -12,7 +12,23 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 ?>
-
+<?php
+	if (isset($_COOKIE['my_cookie'])) {
+		$cookieValue = $_COOKIE['my_cookie'];
+		$cookieValues = explode('|', $cookieValue);
+		$did = $cookieValues[6];
+		if ($did == "99999") {
+			echo '<li class="active"><a href="admin.php">Portal Page</a></li>'; 
+			} 
+		else {
+			echo '<li class="active"><a href="user.php">Portal Page</a></li>'; 
+			}
+			echo '<li><a href="#" onclick="logout()">Logout</a></li>';
+			}
+			else{
+				echo '<li><a href="login_new.php">Login</a></li>';
+				}
+?>
 
 
 <!DOCTYPE HTML>
