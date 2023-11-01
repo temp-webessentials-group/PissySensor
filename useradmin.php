@@ -70,7 +70,7 @@ function populatePasswordChangeForm() {
 					<nav id="nav">
 						<ul class="links">
 							<li><a href="index.php">Air Quality</a></li>
-							<li><a href="Registration_new.html">User Registration</a></li>
+							<li><a href="Registration_new.php">User Registration</a></li>
 							<li><a href="elements.php">Documentation</a></li>
 							<?php
 							if (isset($_COOKIE['my_cookie'])) {
