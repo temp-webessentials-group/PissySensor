@@ -12,7 +12,23 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 ?>
-
+<?php
+	if (isset($_COOKIE['my_cookie'])) {
+		$cookieValue = $_COOKIE['my_cookie'];
+		$cookieValues = explode('|', $cookieValue);
+		$did = $cookieValues[6];
+		if ($did == "99999") {
+			echo '<li class="active"><a href="admin.php">Portal Page</a></li>'; 
+			} 
+		else {
+			echo '<li class="active"><a href="user.php">Portal Page</a></li>'; 
+			}
+			echo '<li><a href="#" onclick="logout()">Logout</a></li>';
+			}
+			else{
+				echo '<li><a href="login_new.php">Login</a></li>';
+				}
+?>
 
 
 <!DOCTYPE HTML>
@@ -43,8 +59,26 @@ if ($conn->connect_error) {
 					<nav id="nav">
 						<ul class="links">
 							<li><a href="index.php">Air Quality</a></li>
-							<li><a href="registration.html">User Registration</a></li>
-							<li><a href="elements.html">Documentation</a></li>
+							<li><a href="Registration_new.php">User Registration</a></li>
+							<li><a href="elements.php">Documentation</a></li>
+							<?php
+							if (isset($_COOKIE['my_cookie'])) {
+
+								$cookieValue = $_COOKIE['my_cookie'];
+								$cookieValues = explode('|', $cookieValue);
+								$did = $cookieValues[6];
+
+								if ($did == "99999") {
+									echo '<li class="active"><a href="admin.php">Portal Page</a></li>'; 
+								} else {
+									echo '<li class="active"><a href="user.php">Portal Page</a></li>'; 
+								}
+								echo '<li><a href="#" onclick="logout()">Logout</a></li>';
+							}
+							else{
+								echo '<li><a href="login_new.php">Login</a></li>';
+							}
+							?>
 						</ul>
 						
 					</nav>
@@ -120,6 +154,15 @@ if ($conn->connect_error) {
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+			function logout() {
+			// Delete the cookie by setting its expiration date to the past
+			document.cookie = "my_cookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+			// Redirect the user to index.php
+			window.location.href = "index.php";
+			}
+			</script>
 
 	</body>
 </html>
