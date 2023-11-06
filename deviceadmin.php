@@ -5,7 +5,7 @@ $db_password = "{<g]+q6WsOLnzt].e4`Nb#g%[z<8Jnfa";
 $dbname = "db_francci";
 
 // Create a database connection
-$conn = new mysqli($host, $username, $password, $dbname);
+$conn = new mysqli($host, $username, $db_password, $dbname);
 
 // Check the connection
 if ($conn->connect_error) {
