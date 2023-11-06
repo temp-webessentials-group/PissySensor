@@ -175,7 +175,7 @@ if ($conn->connect_error) {
 									<a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
 									<p>Learn about the Smark Air team</p>
 									<ul class="actions special">
-										<li><a href="#" class="button">Full Story</a></li>
+										<li><a href="aboutus.php" class="button">Full Story</a></li>
 									</ul>
 								</article>
 								<article>
