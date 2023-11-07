@@ -5,12 +5,6 @@ from pms5003 import PMS5003, ReadTimeoutError
 
 from bme280 import BME280
 
-from gps import GPSReader
-try:
-    gps_reader = GPSReader('/dev/serial/by-id/usb-u-blox_AG_-_www.u-blox.com_u-blox_7_-_GPS_GNSS_Receiver-if00')
-except serial.serialutil.SerialException as e:
-    print(f"Error opening serial port: {str(e)}")
-
 try:
     from smbus2 import SMBus
 except ImportError:
@@ -19,26 +13,39 @@ except ImportError:
 bus = SMBus(1)
 bme280 = BME280(i2c_dev=bus)
 
+#open and close serial port
+def serialOpen(serial_port_path):
+    try:
+        serial_port = serial.Serial(port=serial_port_path, baudrate=9600, timeout=1
+        return serial_port
+    except serial.serialutil.SerialException as e:
+        print(f"Error opening the serial port: {str(e)}")
+        return None
 
+def serialClose(serial_port):
+    if serial_port and serial_port.is_open:
+        serial_port.close()
+        
+#Device S/N
 def get_serial_number():
     with open('/proc/cpuinfo', 'r') as f:
         for line in f:
             if line[0:6] == 'Serial':
                 return line.split(":")[1].strip()
 
-
+#Gas reading
 def getGas():
     reading = gas.read_all()
     return reading
 
-
+#Weather reading
 def getWeather():
     temperature = bme280.get_temperature()
     pressure = bme280.get_pressure()
     humidity = bme280.get_humidity()
     return temperature, pressure, humidity
 
-
+#send data into database
 def sendData(somedata):
     url = "http://www.groupalpha.ca/api.php"
     try:
@@ -50,7 +57,7 @@ def sendData(somedata):
     except Exception as e:
         print(f'Error sending data: {str(e)}')
 
-
+#Particulates reading
 def getParticulates():
     pms5003 = PMS5003()
     try:
@@ -62,10 +69,33 @@ def getParticulates():
                 pms5003 = PMS5003()
     except KeyboardInterrupt:
         pass
+        
+#open GPS serial port
+gps_serial_path = '/dev/serial/by-id/usb-u-blox_AG_-_www.u-blox.com_u-blox_7_-_GPS_GNSS_Receiver-if00'
+gps_serial_port = serialOpen(gps_serial_path)
 
 try:
     while True:
-        time.sleep(10)
+        #retrieve GPS data
+        if gps_serial_port:
+            try:
+                gps_data = None
+                    while gps_data is None:
+                        line = gps_serial_port.readline().decode('utf-8').strip()
+                        if line.startswith('GPGLL'):
+                            parts = line.split(',')
+                            if len(parts) >= 7:
+                                status = parts[6]
+                                if status == 'A':
+                                    latitude = parts[1]
+                                    longitude = parts[3]
+                                    time = parts[5]
+                                    gps_data = {
+                                        'latitude': latitude,
+                                        'longitude': longitude,
+                                        'time': time
+                                    }
+        time.sleep(5)
         gasReading = getGas()
         gasStr = str(gasReading)
         gasLineList = gasStr.splitlines()
@@ -92,9 +122,7 @@ try:
         pm10 = pm10Line[-1]
         #device Serial Number
         serialNumber = get_serial_number()
-        #gps data
-        gps_data = gps_reader.read_gps_data()
-        print(gps_data)
+        
 
         myDict = {
             'Serial Number' : serialNumber,
@@ -109,6 +137,13 @@ try:
             'NH3 ohms' : nh3,
 
         }
+        
+        #if there is gps_data add long, lat, and time to dictionary
+        if gps_data:
+            myDict['Latitude'] = gps_data.get('latitude')
+            myDict['Longitude'] = gps_data.get('longitude')
+            myDict['Time'] = gps_data.get('time')
+        
         print(myDict)
         #sendData(myDict)
 #parse all variables
