@@ -96,6 +96,8 @@ try:
                                         'time': time
                                     }
         time.sleep(5)
+        
+        #retrieve gas readings
         gasReading = getGas()
         gasStr = str(gasReading)
         gasLineList = gasStr.splitlines()
@@ -105,12 +107,15 @@ try:
         reducing = reducingLine[-2]
         nh3Line = gasLineList[2].split()
         nh3 = nh3Line[-2]
+        
+        #retrieve weather data
         weather = getWeather()
         splitWeather = list(weather)
         temperature = splitWeather[0]
         pressure = splitWeather[1]
         humidity = splitWeather[2]
 
+        #retrieve particulates data
         particulates = getParticulates()
         particulatesToString = str(particulates)
         particulatesToLines = particulatesToString.splitlines()
@@ -120,10 +125,11 @@ try:
         pm25 = pm25Line[-1]
         pm10Line = particulatesToLines[3].split()
         pm10 = pm10Line[-1]
-        #device Serial Number
-        serialNumber = get_serial_number()
         
-
+        #retrieve device Serial Number
+        serialNumber = get_serial_number()
+    
+        #data to be sent to website database
         myDict = {
             'Serial Number' : serialNumber,
             'Temperature °C' : temperature,
@@ -146,6 +152,9 @@ try:
         
         print(myDict)
         #sendData(myDict)
-#parse all variables
+
 except KeyboardInterrupt:
     pass
+
+#close GPS serial
+serialClose(gps_serial_port)
