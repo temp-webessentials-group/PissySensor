@@ -170,9 +170,9 @@ if ($conn->connect_error) {
 								<article>
 									<header>
 										<span class="date">Sept 7,2023</span>
-										<h2><a href="#">About Us</a></h2>
+										<h2><a href="aboutus.php">About Us</a></h2>
 									</header>
-									<a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
+									<a href="aboutus.php" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
 									<p>Learn about the Smark Air team</p>
 									<ul class="actions special">
 										<li><a href="aboutus.php" class="button">Full Story</a></li>
