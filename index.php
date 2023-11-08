@@ -186,7 +186,7 @@ if ($conn->connect_error) {
 									<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
 									<p>Registrate here for an account with Smark Air.</p>
 									<ul class="actions special">
-										<li><a href="Registration.html" class="button">Registrate Here</a></li>
+										<li><a href="Registration_new.php" class="button">Registrate Here</a></li>
 									</ul>
 								</article>
 								<article>
