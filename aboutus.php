@@ -148,6 +148,7 @@ if ($conn->connect_error) {
 								<header class="major">
 									<h2>About Us</h2>
 									<p>Meet the Smark Air Team, info on the team here</p>
+									<img src="images/group.jpg" alt="group photo">
 								</header>
 								
 								
@@ -159,7 +160,7 @@ if ($conn->connect_error) {
 										<span class="date">Nov 06,2023</span>
 										<h2><a href="#">Sam Nixon</a></h2>
 									</header>
-									<a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
+									<a href="#" class="image fit"><img src="images/sam2.jpg" alt="" /></a>
 									<p>Your info here</p>
 									<ul class="actions special">
 										<li><a href="#" class="button">Linkedin</a></li>
@@ -170,7 +171,7 @@ if ($conn->connect_error) {
 										<span class="date">Nov 06,2023</span>
 										<h2><a href="#">Curtis Ellenton</a></h2>
 									</header>
-									<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
+									<a href="#" class="image fit"><img src="images/curtis2.jpg" alt="" /></a>
 									<p>Your info here</p>
 									<ul class="actions special">
 										<li><a href="#" class="button">Linkedin</a></li>
@@ -181,10 +182,10 @@ if ($conn->connect_error) {
 										<span class="date">Nov 06,2023</span>
 										<h2><a href="#">Nathon Anderson</a></h2>
 									</header>
-									<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
+									<a href="#" class="image fit"><img src="images/nathon2.jpg" alt="" /></a>
 									<p>Your info here</p>
 									<ul class="actions special">
-										<li><a href="#" class="button">Linkedin</a></li>
+										<li><a href="https://www.linkedin.com/in/nathon-anderson/" class="button">Linkedin</a></li>
 									</ul>
 								</article>
 								<article>
@@ -192,10 +193,10 @@ if ($conn->connect_error) {
 										<span class="date">Nov 06,2023</span>
 										<h2><a href="#">Jordan Caraiman</a></h2>
 									</header>
-									<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
+									<a href="#" class="image fit"><img src="images/jordan2.jpg" alt="" /></a>
 									<p>Your info here</p>
 									<ul class="actions special">
-										<li><a href="#" class="button">Linkedine</a></li>
+										<li><a href="#" class="button">Linkedin</a></li>
 									</ul>
 								</article>
 								<article>
@@ -203,10 +204,10 @@ if ($conn->connect_error) {
 										<span class="date">Nov 06,2023</span>
 										<h2><a href="#">John Narte</a></h2>
 									</header>
-									<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
+									<a href="#" class="image fit"><img src="images/john2.jpg" alt="" /></a>
 									<p>Your info here</p>
 									<ul class="actions special">
-										<li><a href="#" class="button">Linkedin</a></li>
+										<li><a href="https://www.linkedin.com/in/john-narte/" class="button">Linkedin</a></li>
 									</ul>
 								</article>
 								<article>
@@ -214,10 +215,10 @@ if ($conn->connect_error) {
 										<span class="date">Nov 06,2023</span>
 										<h2><a href="#">Wai Frankie Ha</a></h2>
 									</header>
-									<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
+									<a href="#" class="image fit"><img src="images/frankie2.jpg" alt="" /></a>
 									<p>Your info here</p>
 									<ul class="actions special">
-										<li><a href="#" class="button">Linkedin</a></li>
+										<li><a href="https://www.linkedin.com/in/frankieha" class="button">Linkedin</a></li>
 									</ul>
 								</article>
 							</section>
