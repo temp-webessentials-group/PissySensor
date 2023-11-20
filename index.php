@@ -286,7 +286,7 @@ if ($conn->connect_error) {
 			document.cookie = "my_cookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
 			// Redirect the user to index.php
-			window.location.href = "index.php";
+			window.location.href = "https://smarkair.com/index.php";
 			}
 			</script>
 

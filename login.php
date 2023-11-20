@@ -47,7 +47,7 @@ if ($result->num_rows > 0) {
     // Passwords do not match, display an alert and provide a button to go back to login.html
     echo "<script>
             alert('Login incorrect');
-            window.location.href = 'login.html';
+            window.location.href = 'login_new.php';
           </script>";
 }
 

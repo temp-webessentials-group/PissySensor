@@ -1,52 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Test Form for api.php</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Testing Page</title>
 </head>
 <body>
-    <form id="dataForm">
-        <label for="index1">Index 1:</label>
-        <input type="text" name="index1" id="index1"><br>
 
-        <label for="index2">Index 2:</label>
-        <input type="text" name="index2" id="index2"><br>
+<h2>Enter Data for Testing</h2>
 
-        <label for="index3">Index 3:</label>
-        <input type="text" name="index3" id="index3"><br>
+<form id="dataForm">
+    <label for="serialNumber">Serial Number:</label>
+    <input type="text" id="serialNumber" name="serialNumber" required><br>
 
-        <label for="index4">Index 4:</label>
-        <input type="text" name="index4" id="index4"><br>
-        
-        <label for="index5">Index 5:</label>
-        <input type="text" name="index5" id="index5"><br>
+    <label for="temperature">Temperature (°C):</label>
+    <input type="number" id="temperature" name="temperature" required><br>
 
-        <input type="button" value="Submit" onclick="submitForm()">
-    </form>
+    <label for="pressure">Pressure (kPa):</label>
+    <input type="number" id="pressure" name="pressure" required><br>
 
-    <script>
-        function submitForm() {
-            const form = document.getElementById('dataForm');
-            const formData = new FormData(form);
-            const jsonData = {};
+    <label for="humidity">Humidity (%):</label>
+    <input type="number" id="humidity" name="humidity" required><br>
 
-            formData.forEach((value, key) => {
-                jsonData[key] = value;
-            });
+    <label for="pm1">PM1</label>
+    <input type="number" id="pm1" name="pm1" required><br>
 
-            const xhr = new XMLHttpRequest();
-            const url = 'http://smarkair.com/api.php';
+    <label for="pm25">PM2.5</label>
+    <input type="number" id="pm25" name="pm25" required><br>
 
-            xhr.open('POST', url, true);
-            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    <label for="pm10">PM10</label>
+    <input type="number" id="pm10" name="pm10" required><br>
 
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    alert(xhr.responseText);
-                }
-            };
+    <label for="oxidising">Oxidising Gas ohms</label>
+    <input type="number" id="oxidising" name="oxidising" required><br>
 
-            xhr.send(JSON.stringify(jsonData));
+    <label for="reducing">Reducing Gas ohms</label>
+    <input type="number" id="reducing" name="reducing" required><br>
+
+    <label for="nh3">NH3 ohms</label>
+    <input type="number" id="nh3" name="nh3" required><br>
+
+    <label for="latitude">Latitude:</label>
+    <input type="text" id="latitude" name="latitude" required><br>
+
+    <label for="longitude">Longitude:</label>
+    <input type="text" id="longitude" name="longitude" required><br>
+
+    <button type="button" onclick="sendData()">Submit Data</button>
+</form>
+
+<script>
+function sendData() {
+    // Get form values
+    var formData = {
+        'Serial Number': document.getElementById('serialNumber').value,
+        'Temperature °C': document.getElementById('temperature').value,
+        'Pressure kPa': document.getElementById('pressure').value,
+        'Humidity %': document.getElementById('humidity').value,
+        'PM 1.0 μg/m3': document.getElementById('pm1').value,
+        'PM 2.5 μg/m3': document.getElementById('pm25').value,
+        'PM 10 μg/m3': document.getElementById('pm10').value,
+        'Oxidising Gas ohms': document.getElementById('oxidising').value,
+        'Reducing Gas ohms': document.getElementById('reducing').value,
+        'NH3 ohms': document.getElementById('nh3').value,
+        'Latitude': document.getElementById('latitude').value,
+        'Longitude': document.getElementById('longitude').value
+    };
+
+    // Send data to api.php using AJAX
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "api.php", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            alert(xhr.responseText); // Show the response from api.php
         }
-    </script>
+    };
+    xhr.send(JSON.stringify(formData));
+}
+</script>
+
 </body>
 </html>

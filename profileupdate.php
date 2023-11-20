@@ -202,6 +202,9 @@ if ($conn->connect_error) {
 														echo '</header>';
 
 														echo '<form method="post" action="password.php">';
+														
+														echo '<input type="hidden" name="uid" value="' .$row["user_id"] . '">';
+
 														echo '<label for="old_password">Old Password:</label>';
 														echo '<input type="password" name="old_password" id="old_password" required>';
 												

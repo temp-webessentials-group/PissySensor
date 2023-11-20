@@ -17,7 +17,7 @@
 
         // Retrieve the ward number from the URL's query parameters
         $wardNumber = $_GET['ward'];
-
+        
         $host = "ls-5d65c83575404b171779b0657bc9f2f90f9cf69e.cjvvc5r4aih0.us-east-1.rds.amazonaws.com";
         $username = "dbmasteruser";
         $password = "{<g]+q6WsOLnzt].e4`Nb#g%[z<8Jnfa";
@@ -33,14 +33,14 @@
 
         // Calculate the date 30 days ago from the current date
         $thirtyDaysAgo = date('Y-m-d', strtotime('-30 days'));
-
+    
         // Use the $wardNumber in your SQL query to select the appropriate ward's data
         $wardTableName = "ward" . $wardNumber . "_record";
-        $sql = "SELECT date, AVG(index1) AS average_data
+        $sql = "SELECT index15, AVG(index6) AS average_data
                 FROM ward" . $wardNumber . "_record
-                WHERE date >= '$thirtyDaysAgo'
-                GROUP BY date
-                ORDER BY date";
+                WHERE index15 >= '$thirtyDaysAgo'
+                GROUP BY index15
+                ORDER BY index15";
 
         // Execute the query
         $result = $conn->query($sql);
@@ -51,7 +51,7 @@
         }
 
         while ($row = $result->fetch_assoc()) {
-            $date = $row['date'];
+            $date = $row['index15'];
             $average_data = $row['average_data'];
 
             // Add the data to the JavaScript data table
