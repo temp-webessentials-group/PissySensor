@@ -38,7 +38,7 @@ def getWeather():
 
 #send data into database
 def sendData(somedata):
-    url = "http://www.groupalpha.ca/api.php"
+    url = "https://www.smarkair.com/api.php"
     try:
         response = requests.post(url, json=somedata)
         if response.status_code == 200:
@@ -95,7 +95,7 @@ try:
         pm25 = pm25Line[-1]
         pm10Line = particulatesToLines[3].split()
         pm10 = pm10Line[-1]
-        
+
         gps_data = gps_module.read_gps_data()
         if gps_data is not None:
             latitude = gps_data.get('latitude')
@@ -121,11 +121,16 @@ try:
             'NH3 ohms' : nh3,
             'Latitude': latitude,
             'Longitude': longitude
+
         }
-        
-        if 
-        sendData(myDict)
+
+
+
+        print(myDict)
+        try:
+            sendData(myDict)
+        except Exception as e:
+            print(f"Failed to connect to this API: {str(e)}")
 
 except KeyboardInterrupt:
     pass
-
