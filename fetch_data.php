@@ -1,6 +1,5 @@
 <?php
 // Include your database connection code here if needed
-
 $host = "ls-5d65c83575404b171779b0657bc9f2f90f9cf69e.cjvvc5r4aih0.us-east-1.rds.amazonaws.com";
 $username = "dbmasteruser";
 $password = "{<g]+q6WsOLnzt].e4`Nb#g%[z<8Jnfa";
@@ -54,7 +53,7 @@ $wardNames = [
 
 foreach ($tables as $key => $table) {
     // SQL query to retrieve data from the current table
-    $sql = "SELECT * FROM $table ORDER BY date DESC, time DESC LIMIT 1";
+    $sql = "SELECT * FROM $table ORDER BY index15 DESC, index16 DESC LIMIT 1";
 
     // Execute the query
     $result = $conn->query($sql);
@@ -67,8 +66,18 @@ foreach ($tables as $key => $table) {
             $index2 = $row["index2"];
             $index3 = $row["index3"];
             $index4 = $row["index4"];
-            $date = $row["date"];
-            $time = $row["time"];
+            $index5 = $row["index5"];
+            $index6 = $row["index6"];
+            $index7 = $row["index7"];
+            $index8 = $row["index8"];
+            $index9 = $row["index9"];
+            $index10 = $row["index10"];
+            $index11 = $row["index11"];
+            $index12 = $row["index12"];
+            $index13 = $row["index13"];
+            $index14 = $row["index14"];
+            $index15 = $row["index15"];
+            $index16 = $row["index16"];
 
             // Process and append data to the tableHTML
             $tableHTML .= "<tr>";
@@ -76,20 +85,28 @@ foreach ($tables as $key => $table) {
             $tableHTML .= "<td><a href='javascript:void(0);' onclick=\"openPopup('/chart.php?ward=" . ($key + 1) . "')\">{$wardNames[$key]}</a></td>";
             $tableHTML .= "<td><div class='tooltip'>";
 
-            if ($index1 < 51) {
+            if ($index6 < 51) {
                 $tableHTML .= "<p style='color:green; font-weight: bold; text-align: center; margin-bottom: 0.2em;'>Good</p>";
-            } elseif ($index1 > 50 && $index1 < 81) {
+            } elseif ($index6 > 50 && $index6 < 81) {
                 $tableHTML .= "<p style='color:orange; font-weight: bold; text-align: center; margin-bottom: 0.2em;'>Moderate</p>";
             } else {
                 $tableHTML .= "<p style='color:red; font-weight: bold; text-align: center; margin-bottom: 0.2em;'>Unhealthy</p>";
             }
 
             $tableHTML .= "<span class='tooltiptext'>";
-            $tableHTML .= "Index 1: $index1<br>";
-            $tableHTML .= "Index 2: $index2<br>";
-            $tableHTML .= "Index 3: $index3<br>";
-            $tableHTML .= "Index 4: $index4<br>";
-            $tableHTML .= "</br><span style='font-size: smaller;'>Last Update: $date $time</span>";
+//            $tableHTML .= "Serial Number: $index1<br>";
+            $tableHTML .= "Temperature: $index2<br>";
+            $tableHTML .= "Pressure: $index3<br>";
+            $tableHTML .= "Humidity: $index4<br>";
+            $tableHTML .= "PM 1: $index5<br>";
+            $tableHTML .= "PM 2.5: $index6<br>";
+            $tableHTML .= "PM 10: $index7<br>";
+            $tableHTML .= "Oxidising Gas: $index8<br>";
+            $tableHTML .= "Reducing Gas: $index9<br>";
+            $tableHTML .= "NH3: $index10<br>";
+            $tableHTML .= "Latitude: $index11<br>";
+            $tableHTML .= "Longitude: $index12<br>";
+            $tableHTML .= "</br><span style='font-size: smaller;'>Last Update: $index15 $index16</span>";
             $tableHTML .= "</span>";
             $tableHTML .= "</div></td></tr>";
         }

@@ -2,6 +2,7 @@ from enviroplus import gas
 import time
 import requests
 from pms5003 import PMS5003, ReadTimeoutError
+from gps import GPSModule
 
 from bme280 import BME280
 
@@ -13,19 +14,9 @@ except ImportError:
 bus = SMBus(1)
 bme280 = BME280(i2c_dev=bus)
 
-#open and close serial port
-def serialOpen(serial_port_path):
-    try:
-        serial_port = serial.Serial(port=serial_port_path, baudrate=9600, timeout=1
-        return serial_port
-    except serial.serialutil.SerialException as e:
-        print(f"Error opening the serial port: {str(e)}")
-        return None
+# Initialize the GPS module
+gps_module = GPSModule('/dev/serial/by-id/usb-u-blox_AG_-_www.u-blox.com_u-blox_7_-_GPS_GNSS_Receiver-if00')
 
-def serialClose(serial_port):
-    if serial_port and serial_port.is_open:
-        serial_port.close()
-        
 #Device S/N
 def get_serial_number():
     with open('/proc/cpuinfo', 'r') as f:
@@ -47,7 +38,7 @@ def getWeather():
 
 #send data into database
 def sendData(somedata):
-    url = "http://www.groupalpha.ca/api.php"
+    url = "https://www.smarkair.com/api.php"
     try:
         response = requests.post(url, json=somedata)
         if response.status_code == 200:
@@ -69,34 +60,13 @@ def getParticulates():
                 pms5003 = PMS5003()
     except KeyboardInterrupt:
         pass
-        
-#open GPS serial port
-gps_serial_path = '/dev/serial/by-id/usb-u-blox_AG_-_www.u-blox.com_u-blox_7_-_GPS_GNSS_Receiver-if00'
-gps_serial_port = serialOpen(gps_serial_path)
+
 
 try:
     while True:
-        #retrieve GPS data
-        if gps_serial_port:
-            try:
-                gps_data = None
-                    while gps_data is None:
-                        line = gps_serial_port.readline().decode('utf-8').strip()
-                        if line.startswith('GPGLL'):
-                            parts = line.split(',')
-                            if len(parts) >= 7:
-                                status = parts[6]
-                                if status == 'A':
-                                    latitude = parts[1]
-                                    longitude = parts[3]
-                                    time = parts[5]
-                                    gps_data = {
-                                        'latitude': latitude,
-                                        'longitude': longitude,
-                                        'time': time
-                                    }
+
         time.sleep(5)
-        
+
         #retrieve gas readings
         gasReading = getGas()
         gasStr = str(gasReading)
@@ -107,7 +77,7 @@ try:
         reducing = reducingLine[-2]
         nh3Line = gasLineList[2].split()
         nh3 = nh3Line[-2]
-        
+
         #retrieve weather data
         weather = getWeather()
         splitWeather = list(weather)
@@ -125,10 +95,18 @@ try:
         pm25 = pm25Line[-1]
         pm10Line = particulatesToLines[3].split()
         pm10 = pm10Line[-1]
-        
+
+        gps_data = gps_module.read_gps_data()
+        if gps_data is not None:
+            latitude = gps_data.get('latitude')
+            longitude = gps_data.get('longitude')
+        else:
+            latitude = gps_data.get('latitude')
+            longitude = gps_data.get('longitude')
+
         #retrieve device Serial Number
         serialNumber = get_serial_number()
-    
+
         #data to be sent to website database
         myDict = {
             'Serial Number' : serialNumber,
@@ -141,20 +119,18 @@ try:
             'Oxidising Gas ohms' : oxidising,
             'Reducing Gas ohms' : reducing,
             'NH3 ohms' : nh3,
+            'Latitude': latitude,
+            'Longitude': longitude
 
         }
-        
-        #if there is gps_data add long, lat, and time to dictionary
-        if gps_data:
-            myDict['Latitude'] = gps_data.get('latitude')
-            myDict['Longitude'] = gps_data.get('longitude')
-            myDict['Time'] = gps_data.get('time')
-        
+
+
+
         print(myDict)
-        #sendData(myDict)
+        try:
+            sendData(myDict)
+        except Exception as e:
+            print(f"Failed to connect to this API: {str(e)}")
 
 except KeyboardInterrupt:
     pass
-
-#close GPS serial
-serialClose(gps_serial_port)

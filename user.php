@@ -1,7 +1,7 @@
 <?php
-$host = "localhost";
-$username = "db_francci";
-$password = "6S#BN%5sfg";
+$host = "ls-5d65c83575404b171779b0657bc9f2f90f9cf69e.cjvvc5r4aih0.us-east-1.rds.amazonaws.com";
+$username = "dbmasteruser";
+$password = "{<g]+q6WsOLnzt].e4`Nb#g%[z<8Jnfa";
 $dbname = "db_francci";
 
 // Create a database connection
@@ -81,12 +81,12 @@ if ($conn->connect_error) {
 						<a href="index.php" class="logo">Smark Air</a>
 					</header>
 
-					<!-- Nav -->
-					<nav id="nav">
+				<!-- Nav -->
+				<nav id="nav">
 						<ul class="links">
 							<li><a href="index.php">Air Quality</a></li>
-							<li><a href="Registration_new.php">User Registration</a></li>
-							<li><a href="elements.php">Documentation</a></li>
+							<li><a href="Registration.html">User Registration</a></li>
+							<li><a href="elements.html">Documentation</a></li>
 
 							<?php
 							if (isset($_COOKIE['my_cookie'])) {
@@ -103,7 +103,7 @@ if ($conn->connect_error) {
 								echo '<li><a href="#" onclick="logout()">Logout</a></li>';
 							}
 							else{
-								echo '<li><a href="login_new.php">Login</a></li>';
+								echo '<li><a href="login.html">Login</a></li>';
 							}
 							?>
 						</ul>
@@ -130,7 +130,7 @@ if ($conn->connect_error) {
 					$tableName = 'ward' . $loc . '_record';
 
 					// Prepare and execute a SELECT statement to fetch all data from the dynamic table.
-					$sql = "SELECT * FROM $tableName ORDER BY date DESC, time DESC LIMIT 10";
+					$sql = "SELECT * FROM $tableName WHERE index14 = $did ORDER BY index15 DESC, index16 DESC LIMIT 10";
 					$result = $conn->query($sql);
 
 					// Check if there are any rows returned.
@@ -141,17 +141,24 @@ if ($conn->connect_error) {
 						echo "<H3>Here is the last 10 records from your device in Ward".$loc."</H3>";
 						// Start an HTML table.
 						echo "<table class='centered' border='1' style='font-size: 14px;'>";
-						echo "<tr><th>Index 1</th><th>Index 2</th><th>Index 3</th><th>Index 4</th><th>Date</th><th>Time</th></tr>";
+						echo "<tr><th>Temperature</th><th>Pressure</th><th>Humidity</th><th>PM 1</th><th>PM 2.5</th><th>PM 10</th><th>Oxidising Gas</th><th>Reducing Gas</th><th>NH3</th><th>Latitude</th><th>Longitude</th><th>Date</th><th>Time</th></tr>";
 
 						// Output data of each row in an HTML table row.
 						while ($row = $result->fetch_assoc()) {
 							echo "<tr>";
-							echo "<td>" . $row["index1"] . "</td>";
 							echo "<td>" . $row["index2"] . "</td>";
 							echo "<td>" . $row["index3"] . "</td>";
 							echo "<td>" . $row["index4"] . "</td>";
-							echo "<td>" . $row["date"] . "</td>";
-							echo "<td>" . $row["time"] . "</td>";							
+							echo "<td>" . $row["index5"] . "</td>";
+							echo "<td>" . $row["index6"] . "</td>";
+							echo "<td>" . $row["index7"] . "</td>";
+							echo "<td>" . $row["index8"] . "</td>";
+							echo "<td>" . $row["index9"] . "</td>";
+							echo "<td>" . $row["index10"] . "</td>";
+							echo "<td>" . $row["index11"] . "</td>";
+							echo "<td>" . $row["index12"] . "</td>";
+							echo "<td>" . $row["index15"] . "</td>";
+							echo "<td>" . $row["index16"] . "</td>";			
 							echo "</tr>";
 						}
 

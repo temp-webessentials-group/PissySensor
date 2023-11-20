@@ -97,28 +97,30 @@ if ($conn->connect_error) {
 									?>
 
 									<h2>Reporting</h2>
-									<form method="post">
-										<label for="tableSelect">Select Table:</label>
-										<select name="tableSelect" id="tableSelect">
-										<option value="ward1_record">Ward 1</option>
-										<option value="ward2_record">Ward 2</option>
-										<option value="ward3_record">Ward 3</option>
-										<option value="ward4_record">Ward 4</option>
-										<option value="ward5_record">Ward 5</option>
-										<option value="ward6_record">Ward 6</option>
-										<option value="ward7_record">Ward 7</option>
-										<option value="ward8_record">Ward 8</option>
-										<option value="ward9_record">Ward 9</option>
-										<option value="ward10_record">Ward 10</option>
-										<option value="ward11_record">Ward 11</option>
-										<option value="ward12_record">Ward 12</option>
-										<option value="ward13_record">Ward 13</option>
-										<option value="ward14_record">Ward 14</option>
-									</select>
-									<input type="submit" name="submit" value="Display Table">
-									</form>
-									
-									
+									<p>graphs and readings will go here: Template image from Enviro Page</p>
+									<img src="images/screenshot-darkTheme.jpg" alt="Placeholder" style="width:800px;height:800px;">
+										
+									<h2>Inventory</h2>
+									<button id="toggleButton">View Table</button><br>
+									<?php
+										$sql = "SELECT * FROM `device_info` ORDER BY `dev_id`";
+										$result = $conn->query($sql);
+										if ($result->num_rows > 0) {
+											echo"<br>";
+											echo "<table id='deviceTable' style='display: none;'>";
+											echo "<tr><th>Device ID</th><th>Device Serial Number</th></tr>";
+												while ($row = $result->fetch_assoc()) {
+													echo "<tr>";
+													echo "<td>" . $row["dev_id"] . "</td>";
+													echo "<td>" . $row["dev_serial"] . "</td>";
+													echo "</tr>";
+													}
+											echo "</table>";
+											}											
+											else {
+												echo "No records found";
+											}		
+										?>
 
 									<h2>Geolocation Data: </h2>
 									<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2507.3766087946556!2d-114.09183072340633!3d51.064597571715964!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x53716f927202bf3f%3A0x16877e49fcc8dbcb!2sStan%20Grad%20Centre!5e0!3m2!1sen!2sca!4v1696447569696!5m2!1sen!2sca" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
