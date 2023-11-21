@@ -87,10 +87,16 @@ foreach ($tables as $key => $table) {
 
             if ($index6 < 51) {
                 $tableHTML .= "<p style='color:green; font-weight: bold; text-align: center; margin-bottom: 0.2em;'>Good</p>";
-            } elseif ($index6 > 50 && $index6 < 81) {
-                $tableHTML .= "<p style='color:orange; font-weight: bold; text-align: center; margin-bottom: 0.2em;'>Moderate</p>";
-            } else {
+            } elseif ($index6 > 50 && $index6 < 101) {
+                $tableHTML .= "<p style='color:yellow; font-weight: bold; text-align: center; margin-bottom: 0.2em;'>Moderate</p>";
+            } elseif ($index6 > 100 && $index6 < 151) {
+                $tableHTML .= "<p style='color:orange; font-weight: bold; text-align: center; margin-bottom: 0.2em;'>Unhealthy for Sensitive Groups</p>";
+            } elseif ($index6 > 150 && $index6 < 201) {
                 $tableHTML .= "<p style='color:red; font-weight: bold; text-align: center; margin-bottom: 0.2em;'>Unhealthy</p>";
+            } elseif ($index6 > 200 && $index6 < 301) {
+                $tableHTML .= "<p style='color:purple; font-weight: bold; text-align: center; margin-bottom: 0.2em;'>Very Unhealthy</p>";
+            } else {
+                $tableHTML .= "<p style='color:brown; font-weight: bold; text-align: center; margin-bottom: 0.2em;'>Hazardous</p>";
             }
 
             $tableHTML .= "<span class='tooltiptext'>";
