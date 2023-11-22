@@ -5,8 +5,10 @@ John Narte <br>
 Jordan Caraiman <br>
 Nathon Anderson <br>
 Sam Nixon <br>
-Wai Frankie Ha
-
+Wai Frankie Ha <br>
+# Project Website
+https://www.smarkair.com/
+<br>
 # Portable Air Quality Monitor
 Over the past three years, Air Quality has become more and more of a concern for many of us. COVID exposed many buildings having insufficient HVAC units. Unfortunately, portable air quality monitors are unaffordable for the vast majority of people retailing in the $300+ range. We aim to build something that is more affordable, while still being accurate. 
 <br>
@@ -22,7 +24,3 @@ To support the testing and development of the Smark Air website, we've set up a 
 
 ## Sprint 2
 We began with a focus on user administration and device management functions, ensuring the seamless handling of user accounts and monitoring device. We documented our processes and procedures, creating a comprehensive reference for future endeavors and troubleshooting. We configured the integration of Lightsail Additionally, we began development of a API to allow the data to be POSTed to our live database in Lightsail, essential for the storage and retrieval of air quality data. A significant milestone was reached as we completed the alpha Raspberry Pi code. To further enrich user experience, we established a dedicated documentation page on our project's website, granting users easy access to user instructions on how to register their device. 
-
-
-## Project Website
-https://www.smarkair.com/
