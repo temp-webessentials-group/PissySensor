@@ -150,6 +150,7 @@ try:
             }
             
             print("Sending Data...")
+            #
             try:
                 sendData(myDict)
             except Exception as e:
