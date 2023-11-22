@@ -9,6 +9,5 @@ Wai Frankie Ha
 
 # Portable Air Quality Monitor
 Over the past three years, Air Quality has become more and more of a concern for many of us. COVID exposed many buildings having insufficient HVAC units. Unfortunately, portable air quality monitors are unaffordable for the vast majority of people retailing in the $300+ range. We aim to build something that is more affordable, while still being accurate. 
-![image](https://github.com/temp-webessentials-group/smarkair/assets/110635212/48436562-aab6-41b7-9827-b3e543dcf99e)
 
 
