@@ -1,10 +1,10 @@
 # Repository for Capstone Fall 2023
 ## Group Members
-Curtis Ellenton \
-John Narte \
-Jordan Caraiman \
-Nathon Anderson \
-Sam Nixon \
+Curtis Ellenton <br>
+John Narte <br>
+Jordan Caraiman <br>
+Nathon Anderson <br>
+Sam Nixon <br>
 Wai Frankie Ha
 
 # Portable Air Quality Monitor
