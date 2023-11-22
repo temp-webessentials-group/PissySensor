@@ -7,12 +7,13 @@ class GPSModule:
             baudrate=9600,
             timeout=1
         )
-
+    
+    #read data from gps module
     def read_gps_data(self):
         try:
             while True:
                 line = self.serial_port.readline().decode('utf-8').strip()
-
+                #extract line of data relevant to geodata
                 if line.startswith('$GPGLL'):
                     parts = line.split(',')
                     if len(parts) >= 7:
@@ -22,9 +23,10 @@ class GPSModule:
                                 'latitude': 0,
                                 'longitude': 0
                             }
+                        #if gps status is 'A' active extract latitude and longitude data
                         else:
-                            latitude = format(float(parts[1]) / 100, '.6f')
-                            longitude = format(float(parts[3]) / 100, '.6f')
+                            latitude = format(float(parts[1]) / 100 + 0.030302, '.6f')
+                            longitude = format(float(parts[3]) / 100 + 0.045995, '.6f')
                             if parts[2] == 'S':
                                latitude = latitude * -1
                             if parts[4] == 'W':

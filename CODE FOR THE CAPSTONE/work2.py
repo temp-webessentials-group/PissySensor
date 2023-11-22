@@ -17,6 +17,17 @@ bme280 = BME280(i2c_dev=bus)
 # Initialize the GPS module
 gps_module = GPSModule('/dev/serial/by-id/usb-u-blox_AG_-_www.u-blox.com_u-blox_7_-_GPS_GNSS_Receiver-if00')
 
+#get cpu temp for compensation
+with open("/sys/class/thermal/thermal_zone0/temp", "r") as f:
+    temp = f.read()
+    temp = int(temp) / 1000.0
+
+#tuning factor for compensation
+factor = 2.25
+
+#generate array for cpu temp
+tempArray = [temp] * 5
+
 #Device S/N
 def get_serial_number():
     with open('/proc/cpuinfo', 'r') as f:
@@ -24,14 +35,17 @@ def get_serial_number():
             if line[0:6] == 'Serial':
                 return line.split(":")[1].strip()
 
-#Gas reading
+#get gas readings
 def getGas():
     reading = gas.read_all()
     return reading
 
-#Weather reading
+#get weather readings 
 def getWeather():
-    temperature = bme280.get_temperature()
+    cpuTemp = tempArray[1:] + [temp]
+    avgTemp = sum(cpuTemp) / float(len(cpuTemp))
+    rawTemp = bme280.get_temperature()
+    temperature = rawTemp - ((avgTemp - rawTemp) / factor)
     pressure = bme280.get_pressure()
     humidity = bme280.get_humidity()
     return temperature, pressure, humidity
@@ -48,7 +62,7 @@ def sendData(somedata):
     except Exception as e:
         print(f'Error sending data: {str(e)}')
 
-#Particulates reading
+#get PM sensor readings
 def getParticulates():
     pms5003 = PMS5003()
     try:
@@ -61,7 +75,7 @@ def getParticulates():
     except KeyboardInterrupt:
         pass
 
-
+#loop to generate readings to be sent to the database
 try:
     while True:
 
