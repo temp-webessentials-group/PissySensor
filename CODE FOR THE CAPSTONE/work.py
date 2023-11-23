@@ -80,6 +80,7 @@ def getParticulates():
         pass
 
 #loop to generate readings to be sent to the database
+#loop will run 10 times before sending data to website
 try:
     while True:
 
@@ -114,6 +115,7 @@ try:
         pm10Line = particulatesToLines[3].split()
         pm10 = pm10Line[-1]
 
+        #gather gps data from gps.py
         gps_data = gps_module.read_gps_data()
         if gps_data is not None:
             latitude = gps_data.get('latitude')
@@ -125,7 +127,7 @@ try:
         
         
         loop_counter += 1 #increment counter
-        
+        #if block to determine if iteration_limit has been reached
         if loop_counter >= iteration_limit:
             loop_counter = 0 #reset counter
             
@@ -150,7 +152,7 @@ try:
             }
             
             print("Sending Data...")
-            #
+            #try except block to show connection to api failed
             try:
                 sendData(myDict)
             except Exception as e:
