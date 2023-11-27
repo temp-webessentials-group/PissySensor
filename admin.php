@@ -67,65 +67,58 @@ if ($conn->connect_error) {
 					</nav>
 
 				<!-- Main -->
-					<div id="main">
+					<!-- Main -->
+    <div id="main">
 
-						<!-- Post -->
-								<article class="post featured">
-								<header class="major">
-									<h1>Welcome</h1>
-									<h2>Temp Page for Admins</h2>
-								</header>
+        <!-- Post -->
+        <article class="post featured">
+            <header class="major">
+                <h1>Welcome Admins</h1>
+            </header>
 
-									<?php										
-										// Check if the "my_cookie" cookie is set
-										if (isset($_COOKIE['my_cookie'])) {
-											// Get the cookie value and split it into individual values
-											$cookieValue = $_COOKIE['my_cookie'];
-											$cookieValues = explode('|', $cookieValue);
-											$did = $cookieValues[6];
+            <?php
+			function startsWith($string, $prefix) {
+				return substr($string, 0, strlen($prefix)) === $prefix;
+			}
+            // Check if the "my_cookie" cookie is set
+            if (isset($_COOKIE['my_cookie'])) {
+                // Get the cookie value and split it into individual values
+                $cookieValue = $_COOKIE['my_cookie'];
+                $cookieValues = explode('|', $cookieValue);
+                $did = $cookieValues[6];
 
-											if ($did == "99999"){
-												// Allow access to the page
-												echo "<p>You are allow to access this page</p>";
-												
-											}
-											else {
-												echo "<p>You are NOT ALLOWED to access this page</p>";
-											}
-										}
-											
-									?>
+                if ($did == "99999") {
+                    // Allow access to the page
+                    echo "<h2>Reporting</h2>";
+                    $sql = "SHOW TABLES";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                        echo "<form action=\"view_ward.php\" method=\"get\">";
+                        echo "<label for=\"tables\">Select a Ward:</label><br>";
+                        echo "<select name=\"table\" id=\"tables\">";
+                        while ($row = $result->fetch_assoc()) {
+                            $tableName = $row['Tables_in_' . $dbname];
+                            // Display tables that start with 'ward'
+                            if (startsWith($tableName, 'ward')) {
+                                echo "<option value=\"" . $tableName . "\">" . $tableName . "</option>";
+                            }
+                        }
+                        echo "</select><br><br>";
+                        echo "<input type=\"submit\" value=\"View Table\">";
+                        echo "</form>";
+                    } else {
+                        echo "No tables found in the database.";
+                    }
+                }
+            } else {
+                echo "<p>You are NOT allowed access to this page.</p>";
+            }
+            ?>
 
-									<h2>Reporting</h2>
-									<p>graphs and readings will go here: Template image from Enviro Page</p>
-									<img src="images/screenshot-darkTheme.jpg" alt="Placeholder" style="width:800px;height:800px;">
-										
-									<h2>Inventory</h2>
-									<button id="toggleButton">View Table</button><br>
-									<?php
-										$sql = "SELECT * FROM `device_info` ORDER BY `dev_id`";
-										$result = $conn->query($sql);
-										if ($result->num_rows > 0) {
-											echo"<br>";
-											echo "<table id='deviceTable' style='display: none;'>";
-											echo "<tr><th>Device ID</th><th>Device Serial Number</th></tr>";
-												while ($row = $result->fetch_assoc()) {
-													echo "<tr>";
-													echo "<td>" . $row["dev_id"] . "</td>";
-													echo "<td>" . $row["dev_serial"] . "</td>";
-													echo "</tr>";
-													}
-											echo "</table>";
-											}											
-											else {
-												echo "No records found";
-											}		
-										?>
+																			
+									
 
-									<h2>Geolocation Data: </h2>
-									<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2507.3766087946556!2d-114.09183072340633!3d51.064597571715964!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x53716f927202bf3f%3A0x16877e49fcc8dbcb!2sStan%20Grad%20Centre!5e0!3m2!1sen!2sca!4v1696447569696!5m2!1sen!2sca" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-									</header>
+				</header>
 
 								</article>
 
