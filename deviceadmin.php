@@ -186,13 +186,6 @@ if ($conn->connect_error) {
 			<script src="assets/js/main.js"></script>
 			<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 			<script>
-
-				$(document).ready(function() {
-				 Hide or show the table when the button is clicked
-				$("#toggleButton").click(function() {
-				$("#deviceTable").toggle();
-			});
-			});
 			function logout() {
 			// Delete the cookie by setting its expiration date to the past
 			document.cookie = "my_cookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
