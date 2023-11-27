@@ -161,7 +161,7 @@ if ($conn->connect_error) {
 									<a href="#" class="image fit"><img src="images/sam2.jpg" alt="" /></a>
 									<p>Your info here</p>
 									<ul class="actions special">
-										<li><a href="#" class="button">Linkedin</a></li>
+										<li><a href="https://www.linkedin.com/in/sam-nixon-20734025/" class="button">Linkedin</a></li>
 									</ul>
 								</article>
 								<article>
@@ -172,7 +172,7 @@ if ($conn->connect_error) {
 									<a href="#" class="image fit"><img src="images/curtis2.jpg" alt="" /></a>
 									<p>Your info here</p>
 									<ul class="actions special">
-										<li><a href="#" class="button">Linkedin</a></li>
+										<li><a href="https://www.linkedin.com/in/curtis-ellenton-49267923a/" class="button">Linkedin</a></li>
 									</ul>
 								</article>
 								<article>
