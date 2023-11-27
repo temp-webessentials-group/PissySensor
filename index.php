@@ -191,35 +191,24 @@ if ($conn->connect_error) {
 								</article>
 								<article>
 									<header>
-										<span class="date">April 18, 2017</span>
-										<h2><a href="#">Report 1</a></h2>
+										<span class="date">Nov 26 2023</span>
+										<h2><a href="#">Documentation</a></h2>
 									</header>
-									<a href="#" class="image fit"><img src="images/pic04.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
+									<a href="elements.php" class="image fit"><img src="images/pic04.jpg" alt="" /></a>
+									<p>View all the documentation created throughout this course</p>
 									<ul class="actions special">
-										<li><a href="#" class="button">Full Story</a></li>
+										<li><a href="elements.php" class="button">Documents</a></li>
 									</ul>
 								</article>
 								<article>
 									<header>
-										<span class="date">April 14, 2017</span>
-										<h2><a href="#">Report 2 </a></h2>
+										<span class="date">Nov 26 2023</span>
+										<h2><a href="#">GitHub</a></h2>
 									</header>
-									<a href="#" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
+									<a href="https://github.com/temp-webessentials-group/smarkair" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
+									<p>View Our Gitbub Repository for the website and Raspberry Pi</p>
 									<ul class="actions special">
-										<li><a href="#" class="button">Full Story</a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
-										<span class="date">April 11, 2017</span>
-										<h2><a href="#">Report 3</a></h2>
-									</header>
-									<a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Full Story</a></li>
+										<li><a href="https://github.com/temp-webessentials-group/smarkair" class="button">GitHub</a></li>
 									</ul>
 								</article>
 							</section>
