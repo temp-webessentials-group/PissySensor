@@ -206,7 +206,7 @@ if ($conn->connect_error) {
 										<h2><a href="#">GitHub</a></h2>
 									</header>
 									<a href="https://github.com/temp-webessentials-group/smarkair" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
-									<p>View Our Gitbub Repository for the website and Raspberry Pi</p>
+									<p>View Our GitHub Repository for the website and Raspberry Pi</p>
 									<ul class="actions special">
 										<li><a href="https://github.com/temp-webessentials-group/smarkair" class="button">GitHub</a></li>
 									</ul>
