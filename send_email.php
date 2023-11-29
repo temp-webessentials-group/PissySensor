@@ -30,7 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <script type="text/javascript">
     setTimeout(function () {
-        window.location.href = 'https://smarkair.com';
+        window.location.href = document.referrer;
     }, 3000); // Redirect after 3 seconds (adjust as needed)
 </script>
-

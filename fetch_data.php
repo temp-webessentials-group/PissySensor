@@ -14,7 +14,13 @@ if ($conn->connect_error) {
 }
 
 // Initialize the table HTML
-$tableHTML = "<table><tr><td class='left-cell'><table><tr><td class='left-cell'><table><tr><td>Area</td><td>Quality Index</td></tr>";
+$tableHTML = "<table><tr><td class='left-cell'><table><tr><td class='left-cell'><table><tr>";
+
+// Set the width for the "Area" column
+$tableHTML .= "<td style='width: 100px;'>Area</td>";
+
+// Set the width for the "Quality Index" column
+$tableHTML .= "<td style='width: 150px;'>Quality Index</td></tr>";
 
 // An array of table names
 $tables = [
@@ -83,6 +89,7 @@ foreach ($tables as $key => $table) {
             $tableHTML .= "<tr>";
             // Add an onclick event to open a new popup window
             $tableHTML .= "<td><a href='javascript:void(0);' onclick=\"openPopup('/chart.php?ward=" . ($key + 1) . "')\">{$wardNames[$key]}</a></td>";
+//            $tableHTML .= "<td><a href='javascript:void(0);' onclick=\"openPopup('/chart.php?ward=" . ($key + 1) . "')\" style='font-size: smaller;'>{$wardNames[$key]}</a></td>";
             $tableHTML .= "<td><div class='tooltip'>";
 
             if ($index6 < 51) {
