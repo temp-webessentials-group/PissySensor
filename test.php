@@ -57,8 +57,18 @@ foreach ($results as $result) {
 // Convert the array to a JSON-encoded string
 $resultsJson = json_encode($results);
 
-// Redirect to another PHP page with the data
-header("Location: http://groupalpha.ca/another_page.php?" . http_build_query(['results' => $resultsJson]));
-exit();
+// Send a POST request to groupalpha.ca/send_mail.php
+$url = "http://groupalpha.ca/send_email.php";
+$postData = array("resultsJson" => $resultsJson);
 
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+// Output the response from send_mail.php
+echo $response;
 ?>

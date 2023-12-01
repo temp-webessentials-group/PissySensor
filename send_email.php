@@ -1,35 +1,34 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST["name"];
-    $email = $_POST["email"];
-    $message = $_POST["message"];
+    // Retrieve the results JSON from the POST data
+    $resultsJson = $_POST["resultsJson"];
 
-    // Set the recipient email address
+    // Decode the JSON to get the results array
+    $results = json_decode($resultsJson, true);
+
+    // Process the results and send an email
     $to = "waifrankie.ha@edu.sait.ca";
-
-    // Set the subject of the email
-    $subject = "Contact Form Submission from $name";
-
-    // Compose the email message
-    $message_body = "Name: $name\n";
-    $message_body .= "Email: $email\n\n";
-    $message_body .= "Message:\n$message";
+    $subject = "Air Quality Alert from SmarkAir";
+    
+    // Compose the email message based on the results
+    $message = "Air quality alert for specified ward(s):\n\n";
+    foreach ($results as $result) {
+        $message .= "Ward " . $result['ward'] . ": Pm 2.5 = " . $result['index6'] . "\n";
+    }
 
     // Additional headers
-    $headers = "From: $email";
+    $headers = "From: smarkair@groupalpha.ca";
 
     // Send the email
-    if (mail($to, $subject, $message_body, $headers)) {
-        // Display a success message
-        echo "Your message has been sent successfully. You will be redirect to previous page in 3 seconds.";
+    $mailResult = mail($to, $subject, $message, $headers);
+
+    // Output a response based on the email sending result
+    if ($mailResult) {
+        echo "Email sent successfully!";
     } else {
-        echo "Sorry, there was an error sending your message. You will be redirect to previous page in 3 seconds.";
+        echo "Error sending email!";
     }
+} else {
+    echo "Invalid request method!";
 }
 ?>
-
-<script type="text/javascript">
-    setTimeout(function () {
-        window.location.href = document.referrer;
-    }, 3000); // Redirect after 3 seconds (adjust as needed)
-</script>
