@@ -144,9 +144,7 @@ if ($conn->connect_error) {
 						<!-- Featured Post -->
 							<article class="post featured">
 								<header class="major">
-									<h2>About Us</h2>
-									<p>Meet the Smark Air Team, info on the team here</p>
-									<img src="images/group.jpg" alt="group photo">
+									<h2>Meet the Smark Air Team</h2>
 								</header>
 								
 								
