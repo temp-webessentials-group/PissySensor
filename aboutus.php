@@ -159,7 +159,6 @@ if ($conn->connect_error) {
 										<h2><a href="#">Sam Nixon</a></h2>
 									</header>
 									<a href="#" class="image fit"><img src="images/sam2.jpg" alt="" /></a>
-									<p>Your info here</p>
 									<ul class="actions special">
 										<li><a href="https://www.linkedin.com/in/sam-nixon-20734025/" class="button">Linkedin</a></li>
 									</ul>
@@ -170,7 +169,6 @@ if ($conn->connect_error) {
 										<h2><a href="#">Curtis Ellenton</a></h2>
 									</header>
 									<a href="#" class="image fit"><img src="images/curtis2.jpg" alt="" /></a>
-									<p>Your info here</p>
 									<ul class="actions special">
 										<li><a href="https://www.linkedin.com/in/curtis-ellenton-49267923a/" class="button">Linkedin</a></li>
 									</ul>
@@ -181,7 +179,6 @@ if ($conn->connect_error) {
 										<h2><a href="#">Nathon Anderson</a></h2>
 									</header>
 									<a href="#" class="image fit"><img src="images/nathon2.jpg" alt="" /></a>
-									<p>Your info here</p>
 									<ul class="actions special">
 										<li><a href="https://www.linkedin.com/in/nathon-anderson/" class="button">Linkedin</a></li>
 									</ul>
@@ -192,7 +189,6 @@ if ($conn->connect_error) {
 										<h2><a href="#">Jordan Caraiman</a></h2>
 									</header>
 									<a href="#" class="image fit"><img src="images/jordan2.jpg" alt="" /></a>
-									<p>Your info here</p>
 									<ul class="actions special">
 										<li><a href="#" class="button">Linkedin</a></li>
 									</ul>
@@ -203,7 +199,6 @@ if ($conn->connect_error) {
 										<h2><a href="#">John Narte</a></h2>
 									</header>
 									<a href="#" class="image fit"><img src="images/john2.jpg" alt="" /></a>
-									<p>Your info here</p>
 									<ul class="actions special">
 										<li><a href="https://www.linkedin.com/in/john-narte/" class="button">Linkedin</a></li>
 									</ul>
@@ -214,7 +209,6 @@ if ($conn->connect_error) {
 										<h2><a href="#">Wai Frankie Ha</a></h2>
 									</header>
 									<a href="#" class="image fit"><img src="images/frankie2.jpg" alt="" /></a>
-									<p>Your info here</p>
 									<ul class="actions special">
 										<li><a href="https://www.linkedin.com/in/frankieha" class="button">Linkedin</a></li>
 									</ul>
