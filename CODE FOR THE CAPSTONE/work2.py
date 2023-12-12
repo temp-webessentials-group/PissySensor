@@ -80,6 +80,7 @@ def getParticulates():
         pass
 
 #loop to generate readings to be sent to the database
+#loop will run a number of times before sending data to website
 try:
     while True:
 
@@ -114,6 +115,7 @@ try:
         pm10Line = particulatesToLines[3].split()
         pm10 = pm10Line[-1]
 
+        #gather gps data from gps.py
         gps_data = gps_module.read_gps_data()
         if gps_data is not None:
             latitude = gps_data.get('latitude')
