@@ -49,9 +49,9 @@ def getWeather():
     cpuTemp = tempArray[1:] + [temp]
     avgTemp = sum(cpuTemp) / float(len(cpuTemp))
     rawTemp = bme280.get_temperature()
-    temperature = rawTemp - ((avgTemp - rawTemp) / factor)
-    pressure = bme280.get_pressure()
-    humidity = bme280.get_humidity()
+    temperature = round(rawTemp - ((avgTemp - rawTemp) / factor))
+    pressure = round(bme280.get_pressure())
+    humidity = round(bme280.get_humidity())
     return temperature, pressure, humidity
 
 #send data into database
@@ -80,7 +80,7 @@ def getParticulates():
         pass
 
 #loop to generate readings to be sent to the database
-#loop will run 10 times before sending data to website
+#loop will run a number of times before sending data to website
 try:
     while True:
 
