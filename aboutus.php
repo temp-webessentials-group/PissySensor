@@ -188,7 +188,7 @@ if ($conn->connect_error) {
 									</header>
 									<a href="#" class="image fit"><img src="images/jordan2.jpg" alt="" /></a>
 									<ul class="actions special">
-										<li><a href="#" class="button">Linkedin</a></li>
+										<li><a href="https://www.linkedin.com/in/jordan-caraiman-514607275/" class="button">Linkedin</a></li>
 									</ul>
 								</article>
 								<article>
